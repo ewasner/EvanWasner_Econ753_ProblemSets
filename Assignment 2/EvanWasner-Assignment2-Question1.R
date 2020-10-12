@@ -52,7 +52,11 @@ save(chow65.lm,file="chow65.lm.Rdata")
 ## Create table for price indices
 priceIndexTable <- data.frame(Year=c("1960", "1961", "1962", "1963", "1964", "1965"),
                               Estimated_Coefficient=chow65.lm$coefficients[1:6])
+
+## Set price index for year 1960 to 1 and take antilogarithms of coefficients to construct price indices 
 priceIndexTable <- mutate(priceIndexTable, Price_Index=ifelse(Year==1960,1,exp(Estimated_Coefficient)))
+
+## Save table
 save(priceIndexTable,file="priceIndexTable.Rdata")
 
 ################
@@ -60,15 +64,15 @@ save(priceIndexTable,file="priceIndexTable.Rdata")
 ##   PART e   ##
 ################
 
-chow.generalized.lm65 <- lm(generalizedlnrent ~ d61 + d62 + d63 + d64 + d65 + 
-                              generalizedlnmult + generalizedlnmem + generalizedlnaccess,
-                            data=chow65)
-
-chow.gls65 <- gls(lnrent ~ d61 + d62 + d63 + d64 + d65 + lnmult + lnmem + lnaccess, 
-                data=chow65, weights=~sqrt(volume))
+## Perform GLS regression and save output
+chow65.gls <- lm(lnrent ~ d61 + d62 + d63 + d64 + d65 + lnmult + lnmem + lnaccess, 
+                data=chow65, weights=sqrt(volume))
+save(chow65.gls,file="chow65.gls.Rdata")
 
 
-## This is just personal stuff testing out how to do regressions with matrices, ignore...
+##########################################################################################
+## This is just personal stuff testing out how to do regressions with matrices,         ##
+## ignore everything in between these comment sections...                               ##
 xMatrix <- cbind(numeric(82)+1, 
                  as.matrix(select(chow65, lnmult, lnaccess, lnmem,
                             d61, d62, d63, d64, d65)))
@@ -91,3 +95,6 @@ yMatrixgls <- as.matrix(chow65$generalizedlnrent)
 betaMatrixgls <- solve(t(xMatrixgls) %*% xMatrixgls) %*% t(xMatrixgls) %*% yMatrixgls
 betaMatrixgls
 summary(chow.gls65)
+##########################################################################################
+##                            Okay, finish ignoring                                     ##
+##########################################################################################

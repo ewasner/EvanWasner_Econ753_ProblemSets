@@ -14,6 +14,7 @@ load("cor59.Rdata")
 load("cor65.Rdata")
 load("chow65.lm.Rdata")
 load("priceIndexTable.Rdata")
+load("chow65.gls.Rdata")
 ```
 
 # Part 1 - Berndt Exercises
@@ -38,14 +39,10 @@ The correlation coefficients maintained the same signs throughout the two period
 
 In part b, we run a regression for the years 1960-1965 of lnrent on lnmult, lnmem, lnaccess, and a list of dummy variables indicating if the observation takes place in a particular year (excluding the year 1960). 
 
-```{r, layout="l-body-outset"}
-library(pander)
-library(knitr)
-library(broom)
-panderOptions("table.caption.prefix","Quality-Controlled Regression of lnrent on Quality-Variables")
-##pander(summary(chow65.lm), caption="Quality-Controlled Regression of lnrent on Quality-Variables")
-##pander(summary(chow65.lm))
-kable(tidy(chow65.lm), caption="Quality-Controlled Regression of lnrent on Quality-Variables")
+```{r results = "asis", message=FALSE, layout="l-body-outset"}
+library(stargazer)
+stargazer(chow65.lm, type = "latex", style = "default", intercept.bottom = FALSE, header=FALSE,
+          title="Quality-Controlled Regression of lnrent on Quality-Variables")
 ```
 
 ```{r fig.cap="Chow's Original Regression"}
@@ -64,6 +61,22 @@ kable(priceIndexTable, caption="Replicated Price Indices")
 ```{r fig.cap="Chow's Original Price Indices"}
 knitr::include_graphics("Berndt_Price_Indices.png")
 ```
+
+## Question 3e
+
+In part e, we are asked to perform a generalized least squares (GLS) regression, using the square root of the number of observations (volume) as the weight. Using the number of observations as a weight for our regression attempts to overcome the issue of heteroskedacity, as OLS ceases to be the best linear unbiased estimator (BLUE) in the case of heteroskedacity.
+
+```{r results = "asis", message=FALSE}
+library(stargazer)
+stargazer(chow65.lm, chow65.gls, type = "latex", style = "default", intercept.bottom = FALSE, header=FALSE,
+          title="Comparison of OLS and GLS for Hedonic Price Model",
+          column.labels = c("OLS", "WLS"))
+```
+
+Table 5 displays a comparison between the OLS and GLS regressions. None of the coefficients change significantly; all retain their signs and remain more or less within range of the OLS regression. Furthermore, the standard errors do not change significantly either except for general slight increases, as would be expected when controlling for heteroskedacity. What does change, however, is that the coefficient on lnmult is no longer statistically significant, as the coefficient decreased enough to be within range of the standard error.
+
+Generally, performing a log-log regression tends to reduce the impact of heteroskedacity, as the logarithm function "pulls in" large numbers, thus reducing the spread between error terms. However, when variables are small numbers, log-log regressions can actually worsen the problem of heteroskedacity, as taking the logarithm of small numbers tends to increase the spreads. In our case, most of the variables we are dealing with are greater than 1, and thus the problem of heteroskedacity is probably mitigated a bit by performing the log-log regression.
+
 
 # Part 3 - Replication Paper Topic
 
