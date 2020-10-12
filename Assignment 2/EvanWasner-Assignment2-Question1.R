@@ -45,13 +45,13 @@ save(cor65,file="cor65.Rdata")
 ################
 
 ## Run regression of lnrent and save data
-chow.lm65 <- lm(lnrent ~ d61 + d62 + d63 + d64 + d65 + lnmult + lnmem + lnaccess, 
+chow65.lm <- lm(lnrent ~ d61 + d62 + d63 + d64 + d65 + lnmult + lnmem + lnaccess, 
                data=chow65)
-save(chow.lm65,file="chow.lm65.Rdata")
+save(chow65.lm,file="chow65.lm.Rdata")
 
 ## Create table for price indices
 priceIndexTable <- data.frame(Year=c("1960", "1961", "1962", "1963", "1964", "1965"),
-                              Estimated_Coefficient=chow.lm65$coefficients[1:6])
+                              Estimated_Coefficient=chow65.lm$coefficients[1:6])
 priceIndexTable <- mutate(priceIndexTable, Price_Index=ifelse(Year==1960,1,exp(Estimated_Coefficient)))
 save(priceIndexTable,file="priceIndexTable.Rdata")
 
@@ -59,18 +59,6 @@ save(priceIndexTable,file="priceIndexTable.Rdata")
 ## Question 3 ##
 ##   PART e   ##
 ################
-
-chow65 <- mutate(chow65, generalizedvolume=sqrt(volume),
-                 generalizedlnrent=lnrent*sqrt(volume),
-               generalizedlnmult=lnmult*sqrt(volume),
-               generalizedlnaccess=lnaccess*sqrt(volume),
-               generalizedlnadd=lnadd*sqrt(volume),
-               generalizedlnmem=lnmem*sqrt(volume),
-               generalizedd61=d61*sqrt(volume),
-               generalizedd62=d62*sqrt(volume),
-               generalizedd63=d63*sqrt(volume),
-               generalizedd64=d64*sqrt(volume),
-               generalizedd65=d65*sqrt(volume))
 
 chow.generalized.lm65 <- lm(generalizedlnrent ~ d61 + d62 + d63 + d64 + d65 + 
                               generalizedlnmult + generalizedlnmem + generalizedlnaccess,
@@ -87,7 +75,7 @@ xMatrix <- cbind(numeric(82)+1,
 yMatrix <- as.matrix(chow65$lnrent)
 
 betaMatrix <- solve(t(xMatrix) %*% xMatrix) %*% t(xMatrix) %*% yMatrix
-summary(chow.lm65)
+summary(chow65.lm)
 
 uhat <- yMatrix - xMatrix %*% betaMatrix
 varCovarMatrix <- t(uhat) %*% uhat

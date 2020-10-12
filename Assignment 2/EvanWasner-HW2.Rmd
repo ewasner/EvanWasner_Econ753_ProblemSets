@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ``` {r}
 load("cor59.Rdata")
 load("cor65.Rdata")
-load("chow.lm65.Rdata")
+load("chow65.lm.Rdata")
 load("priceIndexTable.Rdata")
 ```
 
@@ -43,9 +43,9 @@ library(pander)
 library(knitr)
 library(broom)
 panderOptions("table.caption.prefix","Quality-Controlled Regression of lnrent on Quality-Variables")
-##pander(summary(chow.lm65), caption="Quality-Controlled Regression of lnrent on Quality-Variables")
-##pander(summary(chow.lm65))
-kable(tidy(chow.lm65), caption="Quality-Controlled Regression of lnrent on Quality-Variables")
+##pander(summary(chow65.lm), caption="Quality-Controlled Regression of lnrent on Quality-Variables")
+##pander(summary(chow65.lm))
+kable(tidy(chow65.lm), caption="Quality-Controlled Regression of lnrent on Quality-Variables")
 ```
 
 ```{r fig.cap="Chow's Original Regression"}
