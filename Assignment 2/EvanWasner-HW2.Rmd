@@ -14,6 +14,8 @@ load("cor59.Rdata")
 load("cor65.Rdata")
 load("chow65.lm.Rdata")
 load("priceIndexTable.Rdata")
+load("priceIndexTable2.Rdata")
+load("priceIndexTable3.Rdata")
 load("chow65.gls.Rdata")
 ```
 
@@ -66,6 +68,10 @@ knitr::include_graphics("Berndt_Price_Indices.png")
 
 In part e, we are asked to perform a generalized least squares (GLS) regression, using the square root of the number of observations (volume) as the weight. Using the number of observations as a weight for our regression attempts to overcome the issue of heteroskedacity, as OLS ceases to be the best linear unbiased estimator (BLUE) in the case of heteroskedacity.
 
+Table 5 displays a comparison between the OLS and GLS regressions. None of the coefficients change significantly; all retain their signs and remain more or less within range of the OLS regression. Furthermore, the standard errors do not change significantly either except for general slight increases, as would be expected when controlling for heteroskedacity. What does change, however, is that the coefficient on lnmult is no longer statistically significant, as the coefficient decreased enough to be within range of the standard error.
+
+Generally, performing a log-log regression tends to reduce the impact of heteroskedacity, as the logarithm function "pulls in" large numbers, thus reducing the spread between error terms. However, when variables are small numbers, log-log regressions can actually worsen the problem of heteroskedacity, as taking the logarithm of small numbers tends to increase the spreads. In our case, most of the variables we are dealing with are greater than 1, and thus the problem of heteroskedacity is probably mitigated a bit by performing the log-log regression.
+
 ```{r results = "asis", message=FALSE}
 library(stargazer)
 stargazer(chow65.lm, chow65.gls, type = "latex", style = "default", intercept.bottom = FALSE, header=FALSE,
@@ -73,10 +79,27 @@ stargazer(chow65.lm, chow65.gls, type = "latex", style = "default", intercept.bo
           column.labels = c("OLS", "WLS"))
 ```
 
-Table 5 displays a comparison between the OLS and GLS regressions. None of the coefficients change significantly; all retain their signs and remain more or less within range of the OLS regression. Furthermore, the standard errors do not change significantly either except for general slight increases, as would be expected when controlling for heteroskedacity. What does change, however, is that the coefficient on lnmult is no longer statistically significant, as the coefficient decreased enough to be within range of the standard error.
+## Question 6a
 
-Generally, performing a log-log regression tends to reduce the impact of heteroskedacity, as the logarithm function "pulls in" large numbers, thus reducing the spread between error terms. However, when variables are small numbers, log-log regressions can actually worsen the problem of heteroskedacity, as taking the logarithm of small numbers tends to increase the spreads. In our case, most of the variables we are dealing with are greater than 1, and thus the problem of heteroskedacity is probably mitigated a bit by performing the log-log regression.
+In question 6a, we run 11 separate regressions for each two-year section of the 1954-1965 period, with one dummy variable in each regression indicating whether the data is in the later year of the two-year section. Using these 11 separate regressions, we allow the coefficients on the qualitative variables to change over time, instead of holding them constant over the full 12 year period. We are then asked to compare the dummy variable coefficients for the adjacent year regressions with the dummy variable coefficients for a single regression encapsulating the full 12 year period. The comparison is given in Table 6.
 
+```{r, layout="l-body-outset"}
+library(knitr)
+kable(priceIndexTable2, caption="Comparison of Pooled vs Adjecent Year Regression Coefficients")
+```
+
+We can see that the coefficients for the two methods differ significantly. Instead, it makes more sense to compare the adjacent year regression coefficients with the yearly change in the pooled coefficients. This is because the dummy variable coefficients in the full pooled regression all indicate the difference in lnrent from that year to the base year. For example, the coefficient on d61 is indicating the change in lnrent from the year 1954 to the year 1961. Whereas, for the adjacent year regressions, each dummy variable coefficient indicates the change in ln rent from year to year. In Table 6, it is clear that the change in the pooled regression coefficients remains much closer to the adjacent year regression coefficients.
+
+## Question 6b
+
+In part 6b, we construct two sets of price indices. The first is constructed from the pooled regression over the 12 year period by exponentiating the 11 dummy variable coefficients. The second is constructed by cumulatively summing the dummy variable coefficients on for each adjacent-year regression. The results are give in Table 7.
+
+```{r, layout="l-body-outset"}
+library(knitr)
+kable(priceIndexTable3, caption="Comparison of Pooled vs Chained Price Indices")
+```
+
+We can see that the indices do not differ significantly, but the chained price indices are generally lower than the pooled indices, indicating greater changes in prices from the chained indices. The latter method is called "chained indexing" because the indices are "chained" (i.e. connected) to changes in quality over time. That is, the chained CPI index allows the coefficients on the qualitative variables in the regression to change from year to year, instead of holding them constant throughout the entire period. To me, the chained-CPI seems to be a more accurate depiction of changes in the CPI, as the assumption of constant effects of quality on pricing over time seems unjustified, especially over significant time periods. 
 
 # Part 3 - Replication Paper Topic
 
