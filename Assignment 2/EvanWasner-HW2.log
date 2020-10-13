@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.12)  12 OCT 2020 23:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.12)  13 OCT 2020 01:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -574,7 +574,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 155.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 155.
-<Berndt_Regression.png, id=49, 621.82312pt x 93.34875pt>
+<Berndt_Regression.png, id=57, 621.82312pt x 93.34875pt>
 File: Berndt_Regression.png Graphic file (type png)
 <use Berndt_Regression.png>
 Package pdftex.def Info: Berndt_Regression.png  used on input line 202.
@@ -585,7 +585,7 @@ Overfull \hbox (152.09503pt too wide) in paragraph at lines 202--202
  []
 
 [2]
-<Berndt_Price_Indices.png, id=62, 444.91219pt x 198.7425pt>
+<Berndt_Price_Indices.png, id=70, 444.91219pt x 198.7425pt>
 File: Berndt_Price_Indices.png Graphic file (type png)
 <use Berndt_Price_Indices.png>
 Package pdftex.def Info: Berndt_Price_Indices.png  used on input line 248.
@@ -593,27 +593,41 @@ Package pdftex.def Info: Berndt_Price_Indices.png  used on input line 248.
 
 Overfull \vbox (45.58pt too high) has occurred while \output is active []
 
-[3 <./Berndt_Regression.PNG> <./Berndt_Price_Indices.PNG>] [4] [5] [6] (./EvanW
-asner-HW2.aux)
+[3 <./Berndt_Regression.PNG> <./Berndt_Price_Indices.PNG>] [4] [5]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
+60.
+(c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+<EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf, id=94, 469.755pt x 3
+25.215pt>
+File: EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (ty
+pe pdf)
+<use EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.p
+df  used on input line 566.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[6] [7 <./EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf>] (./EvanWas
+ner-HW2.aux)
 Package rerunfilecheck Info: File `EvanWasner-HW2.out' has not changed.
-(rerunfilecheck)             Checksum: 288796D8F69F29AC8885240CE9A94498;1258.
+(rerunfilecheck)             Checksum: E193ABA21612A648572267A5599D2C36;1474.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10900 strings out of 481886
- 156443 string characters out of 5930463
- 452056 words of memory out of 5000000
- 26992 multiletter control sequences out of 15000+600000
- 581641 words of font info for 67 fonts, out of 8000000 for 9000
+ 10959 strings out of 481886
+ 157619 string characters out of 5930463
+ 452126 words of memory out of 5000000
+ 27039 multiletter control sequences out of 15000+600000
+ 581960 words of font info for 68 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,10n,66p,348b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-math
-it.enc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
--rm.enc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
-m-mathsy.enc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips
-/lm/lm-ec.enc}<c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
+{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
+nc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
+hit.enc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
+m-rm.enc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/
+lm-mathsy.enc}<c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
 blic/lm/lmbx12.pfb><c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/typ
 e1/public/lm/lmmi10.pfb><c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/font
 s/type1/public/lm/lmr10.pfb><c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/
@@ -622,11 +636,12 @@ ist/fonts/type1/public/lm/lmr17.pfb><c:/Users/evanw/AppData/Roaming/TinyTeX/tex
 mf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/evanw/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/evanw/AppData/Roaming/Tin
 yTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/evanw/AppData/Roamin
-g/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb>
-Output written on EvanWasner-HW2.pdf (6 pages, 184418 bytes).
+g/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/evanw/AppData/Ro
+aming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+Output written on EvanWasner-HW2.pdf (7 pages, 221205 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
- 32 named destinations out of 1000 (max. 500000)
- 75 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 167 PDF objects out of 1000 (max. 8388607)
+ 140 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 96 words of extra memory for PDF output out of 10000 (max. 10000000)
 
