@@ -68,6 +68,8 @@ knitr::include_graphics("Berndt_Price_Indices.png")
 
 In part e, we are asked to perform a generalized least squares (GLS) regression, using the square root of the number of observations (volume) as the weight. Using the number of observations as a weight for our regression attempts to overcome the issue of heteroskedacity, as OLS ceases to be the best linear unbiased estimator (BLUE) in the case of heteroskedacity.
 
+\newpage
+
 Table 5 displays a comparison between the OLS and GLS regressions. None of the coefficients change significantly; all retain their signs and remain more or less within range of the OLS regression. Furthermore, the standard errors do not change significantly either except for general slight increases, as would be expected when controlling for heteroskedacity. What does change, however, is that the coefficient on lnmult is no longer statistically significant, as the coefficient decreased enough to be within range of the standard error.
 
 Generally, performing a log-log regression tends to reduce the impact of heteroskedacity, as the logarithm function "pulls in" large numbers, thus reducing the spread between error terms. However, when variables are small numbers, log-log regressions can actually worsen the problem of heteroskedacity, as taking the logarithm of small numbers tends to increase the spreads. In our case, most of the variables we are dealing with are greater than 1, and thus the problem of heteroskedacity is probably mitigated a bit by performing the log-log regression.
@@ -100,6 +102,10 @@ kable(priceIndexTable3, caption="Comparison of Pooled vs Chained Price Indices")
 ```
 
 We can see that the indices do not differ significantly, but the chained price indices are generally lower than the pooled indices, indicating greater changes in prices from the chained indices. The latter method is called "chained indexing" because the indices are "chained" (i.e. connected) to changes in quality over time. That is, the chained CPI index allows the coefficients on the qualitative variables in the regression to change from year to year, instead of holding them constant throughout the entire period. To me, the chained-CPI seems to be a more accurate depiction of changes in the CPI, as the assumption of constant effects of quality on pricing over time seems unjustified, especially over significant time periods. 
+
+# Part 2 - Price Index and Minimum Wage Exercise
+
+Ok, here we fucking go
 
 # Part 3 - Replication Paper Topic
 
