@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.12)  13 OCT 2020 01:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.12)  13 OCT 2020 03:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -353,56 +353,74 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutvoffset=\dimen159
 \Gm@dimlist=\toks24
 )
+(c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.
+sty
+Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count274
+\FV@InFile=\read2
+\FV@TabBox=\box49
+\c@FancyVerbLine=\count275
+\FV@StepNumber=\count276
+\FV@OutFile=\write3
+) (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.st
+y
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip53
+\fb@frw=\dimen160
+\fb@frh=\dimen161
+\FrameRule=\dimen162
+\FrameSep=\dimen163
+)
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.st
 y
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip53
-\LTright=\skip54
-\LTpre=\skip55
-\LTpost=\skip56
-\LTchunksize=\count274
-\LTcapwidth=\dimen160
-\LT@head=\box49
-\LT@firsthead=\box50
-\LT@foot=\box51
-\LT@lastfoot=\box52
-\LT@cols=\count275
-\LT@rows=\count276
-\c@LT@tables=\count277
-\c@LT@chunks=\count278
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count277
+\LTcapwidth=\dimen164
+\LT@head=\box50
+\LT@firsthead=\box51
+\LT@foot=\box52
+\LT@lastfoot=\box53
+\LT@cols=\count278
+\LT@rows=\count279
+\c@LT@tables=\count280
+\c@LT@chunks=\count281
 \LT@p@ftn=\toks25
 )
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.
 sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen161
-\lightrulewidth=\dimen162
-\cmidrulewidth=\dimen163
-\belowrulesep=\dimen164
-\belowbottomsep=\dimen165
-\aboverulesep=\dimen166
-\abovetopsep=\dimen167
-\cmidrulesep=\dimen168
-\cmidrulekern=\dimen169
-\defaultaddspace=\dimen170
-\@cmidla=\count279
-\@cmidlb=\count280
-\@aboverulesep=\dimen171
-\@belowrulesep=\dimen172
-\@thisruleclass=\count281
-\@lastruleclass=\count282
-\@thisrulewidth=\dimen173
+\heavyrulewidth=\dimen165
+\lightrulewidth=\dimen166
+\cmidrulewidth=\dimen167
+\belowrulesep=\dimen168
+\belowbottomsep=\dimen169
+\aboverulesep=\dimen170
+\abovetopsep=\dimen171
+\cmidrulesep=\dimen172
+\cmidrulekern=\dimen173
+\defaultaddspace=\dimen174
+\@cmidla=\count282
+\@cmidlb=\count283
+\@aboverulesep=\dimen175
+\@belowrulesep=\dimen176
+\@thisruleclass=\count284
+\@lastruleclass=\count285
+\@thisrulewidth=\dimen177
 )
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.
 sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count283
+\etb@tempcnta=\count286
 )
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.
 sty
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
-\fn@notes=\box53
-\fn@width=\dimen174
+\fn@notes=\box54
+\fn@width=\dimen178
 )
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.
 sty
@@ -420,8 +438,8 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\Gin@req@height=\dimen175
-\Gin@req@width=\dimen176
+\Gin@req@height=\dimen179
+\Gin@req@width=\dimen180
 )
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/grffile/grffile.st
 y
@@ -433,8 +451,8 @@ line 40.
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backen
 d-pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count284
-\l__pdf_internal_box=\box54
+\l__kernel_color_stack_int=\count287
+\l__pdf_internal_box=\box55
 ) (./EvanWasner-HW2.aux
 
 LaTeX Warning: Label `' multiply defined.
@@ -442,24 +460,24 @@ LaTeX Warning: Label `' multiply defined.
 )
 \openout1 = `EvanWasner-HW2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
 
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epsto
 pdf-base.sty
@@ -472,7 +490,7 @@ df-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 76.
+Package hyperref Info: Link coloring OFF on input line 116.
 
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
 ty
@@ -486,14 +504,14 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count285
+\c@section@level=\count288
 )
-LaTeX Info: Redefining \ref on input line 76.
-LaTeX Info: Redefining \pageref on input line 76.
-LaTeX Info: Redefining \nameref on input line 76.
+LaTeX Info: Redefining \ref on input line 116.
+LaTeX Info: Redefining \pageref on input line 116.
+LaTeX Info: Redefining \nameref on input line 116.
 (./EvanWasner-HW2.out) (./EvanWasner-HW2.out)
-\@outlinefile=\write3
-\openout3 = `EvanWasner-HW2.out'.
+\@outlinefile=\write4
+\openout4 = `EvanWasner-HW2.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -529,39 +547,39 @@ LaTeX Info: Redefining \nameref on input line 76.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 7
-8.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+18.
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 7
-8.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+18.
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-78.
+118.
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-78.
+118.
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 78.
+(Font)              <12> on input line 118.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 78.
+(Font)              <8> on input line 118.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 78.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 78.
-
+(Font)              <6> on input line 118.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 118
+.
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 78.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 118
+.
 (c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -569,60 +587,112 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
 x.map}]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 155.
+(Font)              <10> on input line 195.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 155.
+(Font)              <7> on input line 195.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 155.
-<Berndt_Regression.png, id=57, 621.82312pt x 93.34875pt>
+(Font)              <5> on input line 195.
+<Berndt_Regression.png, id=73, 621.82312pt x 93.34875pt>
 File: Berndt_Regression.png Graphic file (type png)
 <use Berndt_Regression.png>
-Package pdftex.def Info: Berndt_Regression.png  used on input line 202.
+Package pdftex.def Info: Berndt_Regression.png  used on input line 242.
 (pdftex.def)             Requested size: 621.85005pt x 93.35278pt.
 
-Overfull \hbox (152.09503pt too wide) in paragraph at lines 202--202
+Overfull \hbox (152.09503pt too wide) in paragraph at lines 242--242
 [][] 
  []
 
 [2]
-<Berndt_Price_Indices.png, id=70, 444.91219pt x 198.7425pt>
+<Berndt_Price_Indices.png, id=86, 444.91219pt x 198.7425pt>
 File: Berndt_Price_Indices.png Graphic file (type png)
 <use Berndt_Price_Indices.png>
-Package pdftex.def Info: Berndt_Price_Indices.png  used on input line 248.
+Package pdftex.def Info: Berndt_Price_Indices.png  used on input line 288.
 (pdftex.def)             Requested size: 444.92465pt x 198.74806pt.
 
 Overfull \vbox (45.58pt too high) has occurred while \output is active []
 
 [3 <./Berndt_Regression.PNG> <./Berndt_Price_Indices.PNG>] [4] [5]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
-60.
-(c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-<EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf, id=94, 469.755pt x 3
-25.215pt>
+<EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf, id=110, 469.755pt x 
+325.215pt>
 File: EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (ty
 pe pdf)
 <use EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf>
 Package pdftex.def Info: EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.p
-df  used on input line 566.
+df  used on input line 602.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[6] [7 <./EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf>] (./EvanWas
-ner-HW2.aux)
+<EvanWasner-HW2_files/figure-latex/unnamed-chunk-11-1.pdf, id=111, 469.755pt x 
+325.215pt>
+File: EvanWasner-HW2_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (ty
+pe pdf)
+<use EvanWasner-HW2_files/figure-latex/unnamed-chunk-11-1.pdf>
+Package pdftex.def Info: EvanWasner-HW2_files/figure-latex/unnamed-chunk-11-1.p
+df  used on input line 631.
+(pdftex.def)             Requested size: 375.82602pt x 260.18724pt.
+<EvanWasner-HW2_files/figure-latex/unnamed-chunk-12-1.pdf, id=112, 469.755pt x 
+325.215pt>
+File: EvanWasner-HW2_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (ty
+pe pdf)
+<use EvanWasner-HW2_files/figure-latex/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: EvanWasner-HW2_files/figure-latex/unnamed-chunk-12-1.p
+df  used on input line 652.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[6] [7 <./EvanWasner-HW2_files/figure-latex/unnamed-chunk-10-1.pdf> <./EvanWasn
+er-HW2_files/figure-latex/unnamed-chunk-11-1.pdf>] [8 <./EvanWasner-HW2_files/f
+igure-latex/unnamed-chunk-12-1.pdf>]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 7
+07.
+(c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 713.
+[9]
+Underfull \vbox (badness 10000) detected at line 882
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 882
+ []
+
+[10]
+Underfull \vbox (badness 10000) detected at line 882
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 882
+ []
+
+[11] [12]
+Underfull \vbox (badness 10000) detected at line 1038
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1038
+ []
+
+[13]
+Underfull \vbox (badness 10000) detected at line 1038
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1038
+ []
+
+[14] [15] (./EvanWasner-HW2.aux)
 Package rerunfilecheck Info: File `EvanWasner-HW2.out' has not changed.
-(rerunfilecheck)             Checksum: E193ABA21612A648572267A5599D2C36;1474.
+(rerunfilecheck)             Checksum: 44330770CE6C686809D5E15F1F9C6398;1842.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10959 strings out of 481886
- 157619 string characters out of 5930463
- 452126 words of memory out of 5000000
- 27039 multiletter control sequences out of 15000+600000
- 581960 words of font info for 68 fonts, out of 8000000 for 9000
+ 11471 strings out of 481886
+ 165825 string characters out of 5930463
+ 487371 words of memory out of 5000000
+ 27521 multiletter control sequences out of 15000+600000
+ 582597 words of font info for 70 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,10n,66p,348b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,10n,66p,571b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.e
 nc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
 hit.enc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
@@ -637,11 +707,13 @@ mf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/evanw/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/evanw/AppData/Roaming/Tin
 yTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/evanw/AppData/Roamin
 g/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/evanw/AppData/Ro
-aming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on EvanWasner-HW2.pdf (7 pages, 221205 bytes).
+aming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/evanw/AppDa
+ta/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/evanw/
+AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on EvanWasner-HW2.pdf (15 pages, 304423 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 140 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 246 PDF objects out of 1000 (max. 8388607)
+ 204 compressed objects within 3 object streams
+ 56 named destinations out of 1000 (max. 500000)
+ 138 words of extra memory for PDF output out of 10000 (max. 10000000)
 

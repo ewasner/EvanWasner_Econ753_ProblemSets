@@ -113,11 +113,36 @@ save(inflationPlot,file="inflationPlot.Rdata")
 ##                Minimum Wage                     ##
 #####################################################
 
-nominalWage <- readWorksheetFromFile("Min_wage.xlsx",
+## Extract data
+wage <- readWorksheetFromFile("Min_wage.xlsx",
                               sheet="Min wageHistory of Federal Mini",
                               startRow=6,
                               startCol=1,
                               endCol=2)
+colnames(wage) <- c("year", "Nominal_Wage")
 
+## Calculate real wage in CPI-U-RS values (already based to 100 in year 2018)
+wage <- cbind(wage, Real_Wage=wage$Nominal_Wage / (RcpiURSAnnual$cpi/100))
 
+wagePlot <- ggplot(wage, aes(x=year, y=Real_Wage)) + geom_line() + 
+  xlab("Year") + ylab("Real Wage") + theme_bw()
 
+## Calculating hypothetical wage - gathering inflation rate
+wage <- cbind(wage, inflation=RcpiURSAnnual$inflation, hype_Wage=vector(mode="double", length=52))
+wage$hype_Wage[1] <- wage$Nominal_Wage[1]
+
+## Calculate hypothetical wage based on inflation rate
+for (val in 2:52){
+  wage$hype_Wage[val] <- wage$hype_Wage[val-1] * (1 + 0.01 * wage$inflation[val])
+}
+
+wage2 <- gather(data=wage, "Wage_Type", "Wage", -year, -inflation, -Real_Wage)
+
+wage2Plot <- ggplot(wage2, aes(x=year, y=Wage, color=Wage_Type)) + geom_line(size=1) + 
+  scale_y_continuous(name="Real Wage", limits=c(0,15)) +
+  scale_x_continuous(name="Year") + theme_bw() + 
+  scale_color_discrete(name="Legend", labels=c("Hypothetical Wage", "Actual Nominal Wage"))
+
+## Save wage
+save(wage,file="wage.Rdata")
+save(wage2,file="wage2.Rdata")
