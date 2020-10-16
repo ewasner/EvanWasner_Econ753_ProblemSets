@@ -16,10 +16,19 @@ load("edExTable.Rdata")
 
 # Part 1 - Berndt Exercises
 
+Should summarize all of quesiton 1 here
+
 ## Question 1a
+
+In part a, we calculate the mean hourly and annual wage using two methods. The first takes the arithmetic mean of the logarithm of hourly wages and exponentiates it to get the geometric mean. The second method *begins* by exponentiating the logarithm of hourly wages and *then* takes the arithmetic mean. The annual wage is computed by multiplying the two derived mean hourly wages by 2,000 (assuming a working year contains 2,000 hours). The results are given in Table 1. The arithmetic mean is 13% larger than the geometric mean. The fact that there is a difference between the two is due to the fact that performing a logarithm (and its inverse, exponentiation) is not a linear transformation, and so the exponent of a mean logarithm does not equal the mean of an exponentiated logarithm. The fact that the geometric mean is smaller is due to the fact that the logarithm operator decreases the values of large numbers more than it decreases the values of small numbers, thus taking the logarithm of a set of numbers greater than one will decrease the mean.
+
+In Table 2, the means and standard deviations of years of schooling and years of potential experience are given. We can see that the mean years of education is 12.54, which indicates that the average worker does not have a college education. The mean years of experience is 18.7, and the average age is likely the around the sum of the average years of education and the average years of experience. The standard deviation for years of experience is quite high (13.4), which indicates a wide range of ages in the sample. The standard deviation for years of education is lower (2.7), as the years of education will likely hover around the number of years of a high school education.
 
 ```{r, layout="l-body-outset"}
 library(knitr)
 kable(lnwageMeanTable, caption="Geometric and Arithmetic Mean for 1978 Wages", digits=2)
 kable(edExTable, caption="Mean and Standard Deviation of Education and Experience", digits=2)
 ```
+
+## Question 1b
+
