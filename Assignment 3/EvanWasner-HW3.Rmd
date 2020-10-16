@@ -1,0 +1,25 @@
+---
+title: "Econ 753 HW3"
+author: "Evan Wasner"
+date: "10/16/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+``` {r}
+load("lnwageMeanTable.Rdata")
+load("edExTable.Rdata")
+```
+
+# Part 1 - Berndt Exercises
+
+## Question 1a
+
+```{r, layout="l-body-outset"}
+library(knitr)
+kable(lnwageMeanTable, caption="Geometric and Arithmetic Mean for 1978 Wages", digits=2)
+kable(edExTable, caption="Mean and Standard Deviation of Education and Experience", digits=2)
+```
