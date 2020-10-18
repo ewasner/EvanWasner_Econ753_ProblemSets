@@ -10,8 +10,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ``` {r}
-load("lnwageMeanTable.Rdata")
-load("edExTable.Rdata")
+load("cps78.lnwageMeanTable.Rdata")
+load("cps78.edExTable.Rdata")
+load("cps78.demographicsTable.Rdata")
+load("cps78.genderTable.Rdata")
+load("cps78.raceTable.Rdata")
 ```
 
 # Part 1 - Berndt Exercises
@@ -26,9 +29,31 @@ In Table 2, the means and standard deviations of years of schooling and years of
 
 ```{r, layout="l-body-outset"}
 library(knitr)
-kable(lnwageMeanTable, caption="Geometric and Arithmetic Mean for 1978 Wages", digits=2)
-kable(edExTable, caption="Mean and Standard Deviation of Education and Experience", digits=2)
+kable(cps78.lnwageMeanTable, caption="Geometric and Arithmetic Mean for 1978 Wages", digits=2)
+kable(cps78.edExTable, caption="Mean and Standard Deviation of Education and Experience", digits=2)
 ```
 
 ## Question 1b
 
+In part b, we calculate the mean values for the dummy variables nonwh (indicates whether the individual is nonwhite and non-Hispanic), hisp (indicates whether the individual is nonwhite and Hispanic), and fe (indicates whether the individual is female). Since they are dummy variables, these means give the proportion of individuals in the sample that are Black, nonwhite Hispanic, and female, respectively. We can then multiply these proportions by the sample size (550) in order to find the number of individuals in the sample in each demographic group. The results are given in Table 3. There are 57 Black individuals, 36 nonwhite Hispanic individuals, and 207 female individuals (nearly half of the sample) in the sample.
+
+```{r, layout="l-body-outset"}
+library(knitr)
+kable(cps78.demographicsTable, caption="Means and Number of Individuals in Demographic Groups", digits=2)
+```
+
+## Question 1c
+
+In part c, we subdivide the data first by gender and then by race. Means and standard deviations for years of education as well as geometric mean wages and standard deviations are calculated for all demographic groups. This data provides means and standard deviations of the raw data, without controlling for factors such as human capital. The results are given in table4. 
+
+```{r, layout="l-body-outset", warning=FALSE}
+library(knitr)
+library(kableExtra)
+kbl(rbind(cps78.genderTable,cps78.raceTable), booktabs=T, digits=2,
+    caption = "Years of Education and Mean Wages by Race") %>% 
+  pack_rows(index=c("Gender"=2, "Race"=3)) %>%
+  kable_styling(position = "center") %>%
+  add_header_above(c("Education" = 3, "lnWage" = 3))
+```
+
+We can see that, on average, men make more than $1.50 more than women despite having slightly less years of education. Whites make around $1 more than both Blacks and Hispanics, although Whites also on average have more years of education than the other two groups. Males have a higher standard deviation of wages than women, and Whites have a high standard deviation of wages than Blacks and Hispanics. This may be due to the fact that women and racial minorities are often excluded from certain occupations and thus may be more crowded into certain occupations with similar wage rates, as opposed to Whites who have access to a wide spectrum of pay grades.
