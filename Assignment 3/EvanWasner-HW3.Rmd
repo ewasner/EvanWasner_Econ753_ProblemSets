@@ -44,7 +44,7 @@ kable(cps78.demographicsTable, caption="Means and Number of Individuals in Demog
 
 ## Question 1c
 
-In part c, we subdivide the data first by gender and then by race. Means and standard deviations for years of education as well as geometric mean wages and standard deviations are calculated for all demographic groups. This data provides means and standard deviations of the raw data, without controlling for factors such as human capital. The results are given in table4. 
+In part c, we subdivide the data first by gender and then by race. Means and standard deviations for years of education as well as geometric mean wages and standard deviations of wages are calculated for all demographic groups. This data provides means and standard deviations of the raw data, without controlling for factors such as human capital. The results are given in table4. 
 
 ```{r, layout="l-body-outset", warning=FALSE}
 library(knitr)
@@ -57,3 +57,6 @@ kbl(rbind(cps78.genderTable,cps78.raceTable), booktabs=T, digits=2,
 ```
 
 We can see that, on average, men make more than $1.50 more than women despite having slightly less years of education. Whites make around $1 more than both Blacks and Hispanics, although Whites also on average have more years of education than the other two groups. Males have a higher standard deviation of wages than women, and Whites have a high standard deviation of wages than Blacks and Hispanics. This may be due to the fact that women and racial minorities are often excluded from certain occupations and thus may be more crowded into certain occupations with similar wage rates, as opposed to Whites who have access to a wide spectrum of pay grades.
+
+## Question 1d
+
