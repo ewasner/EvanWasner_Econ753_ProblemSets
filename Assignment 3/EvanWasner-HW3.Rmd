@@ -15,6 +15,11 @@ load("cps78.edExTable.Rdata")
 load("cps78.demographicsTable.Rdata")
 load("cps78.genderTable.Rdata")
 load("cps78.raceTable.Rdata")
+load("cps85.demographicsTable.Rdata")
+load("cps85.genderTable.Rdata")
+load("cps85.raceTable.Rdata")
+load("cps78.totalTable.Rdata")
+load("cps85.totalTable.Rdata")
 ```
 
 # Part 1 - Berndt Exercises
@@ -53,10 +58,42 @@ kbl(rbind(cps78.genderTable,cps78.raceTable), booktabs=T, digits=2,
     caption = "Years of Education and Mean Wages by Race") %>% 
   pack_rows(index=c("Gender"=2, "Race"=3)) %>%
   kable_styling(position = "center") %>%
-  add_header_above(c("Education" = 3, "lnWage" = 3))
+  add_header_above(c(" ", "Education" = 2, "lnWage" = 3))
 ```
 
 We can see that, on average, men make more than $1.50 more than women despite having slightly less years of education. Whites make around $1 more than both Blacks and Hispanics, although Whites also on average have more years of education than the other two groups. Males have a higher standard deviation of wages than women, and Whites have a high standard deviation of wages than Blacks and Hispanics. This may be due to the fact that women and racial minorities are often excluded from certain occupations and thus may be more crowded into certain occupations with similar wage rates, as opposed to Whites who have access to a wide spectrum of pay grades.
 
 ## Question 1d
 
+In question 1d, we repeat exercises 1a-c with the 1985 data set and compare results. These results are summarized in Tables 5 and 6. In Table 5, we compare the demographic makeup of the survey samples. The racial composition of the sample did not change substantially, with the percentage of Blacks increasing from 10% in 1978 to 13% in 1985 and the percentage of nonwhite Hispanics decreasing from 7% to 5%. However, there was a large increase in the gender composition of the samples, with the percentage of females increasing from 38% in 1978 to 46% in 1985.
+
+```{r, layout="l-body-outset"}
+library(knitr)
+library(kableExtra)
+
+kbl(cbind(cps78.demographicsTable, cps85.demographicsTable),
+    caption="Comparison of demographics between 1978 and 1985", 
+    booktabs=T, digits=2) %>%
+  add_header_above(c(" ", "1978" = 2, "1985" = 2))%>%
+  kable_styling(position = "center")
+```
+
+In Table 6, years of education and wages are compared for demographics of each year. The mean years of education increased across all demographic groups. With regards to gender, whereas females had 0.36 more years of education than men in 1978, in 1985 mean years of education were about equal for both. However, peculiarly, mean real wages decreased more substantially for males than for females even though male education increased by more than female education, with male real wages falling by 14% and female real wages falling by 3%. Similar patterns can be seen across race, as Hispanics had the largest percent increase in years of education while also seeing the largest percent decrease in real wages. Overall, all demographics saw a decrease in real wages, but the disproportionate changes in education are not broadly consistent with the human capital model for the various subgroups.
+
+```{r, layout="l-body-outset", warning=FALSE}
+library(knitr)
+library(kableExtra)
+
+table1d <- cbind(rbind(cps78.genderTable,cps78.raceTable,cps78.totalTable),
+          rbind(cps85.genderTable,cps85.raceTable,cps85.totalTable))
+kbl(cbind(table1d[,1:2], table1d[,6:7], "%Change"=table1d[,6]/table1d[,1]-1,
+          table1d[,3:4], table1d[8:9], "%Change"=table1d[,8]/table1d[,3]-1),
+    booktabs=T, digits=2,
+    caption = "Comparison of education and real wages between 1978 and 1985") %>% 
+  pack_rows(index=c("Gender"=2, "Race"=3, "Total"=1)) %>%
+  add_header_above(c(" ", "1978" = 2, "1985" = 2, " ", "1978" = 2, "1985" = 2, " ")) %>%
+  add_header_above(c(" ", "Education" = 5, "lnWage" = 5)) %>%
+  kable_styling(position = "center")
+```
+
+## Question 1e

@@ -26,7 +26,7 @@ cps <- read.dta("http://courses.umass.edu/econ753/berndt/stata/chap5-cps.dta")
 cps78 <- filter(cps, year==1978)
 cps85 <- filter(cps, year==1985)
 
-## Exponentiate wage for geometric mean
+## Exponentiate wage 
 cps78 <- mutate(cps78, wage=exp(lnwage))
 
 ## Get geometric and arithmetic mean
@@ -115,3 +115,95 @@ cps78.raceTable <- data.frame("Mean ed" = c(mean(cps78.wh$ed), mean(cps78.nonwh$
 rownames(cps78.raceTable) <- c("Whites", "NonWhites", "Hispanic")
 colnames(cps78.raceTable) <- c("Mean", "SD", "Mean Hourly", "SD", "Mean Annual")
 save(cps78.raceTable, file="cps78.raceTable.Rdata")
+
+################
+## Question 1 ##
+##   PART d   ##
+################
+
+## Exponentiate wage 
+cps85 <- mutate(cps85, wage=exp(lnwage))
+
+## Deflate wages by deflator
+cps85.deflator <- 1.649
+cps85 <- mutate(cps85, wage=wage/cps85.deflator)
+cps85 <- mutate(cps85, lnwage=log(wage))
+
+## Get geometric mean and standard deviation
+cps85.geometricMeanlnwage <- exp(mean(cps85$lnwage))
+cps85.sdwage <- sd(cps85$wage)
+
+## Annual mean
+cps85.annualGeometricMeanlnwage <- 2000 * cps85.geometricMeanlnwage
+
+## Mean and standard deviation of ED
+cps85.meanEd <- mean(cps85$ed)
+cps85.sdEd <- sd(cps85$ed)
+
+## Sample size
+cps85.sampleSize <- 534
+
+## Means for demographic dummy variables
+cps85.nonwh.mean <- mean(cps85$nonwh)
+cps85.hisp.mean <- mean(cps85$hisp)
+cps85.fe.mean <- mean(cps85$fe)
+
+## Counts for demographic dummy variables
+cps85.nonwh.count <- cps85.sampleSize * cps85.nonwh.mean
+cps85.hisp.count <- cps85.sampleSize * cps85.hisp.mean
+cps85.fe.count <- cps85.sampleSize * cps85.fe.mean
+
+## Make table with info
+cps85.demographicsTable <- data.frame(Mean = c(cps85.nonwh.mean, cps85.hisp.mean, cps85.fe.mean),
+                                      Count = c(cps85.nonwh.count, cps85.hisp.count, cps85.fe.count))
+rownames(cps85.demographicsTable) <- c("nonwh", "hisp", "fe")
+save(cps85.demographicsTable, file="cps85.demographicsTable.Rdata")
+
+## Filter to subgroups
+cps85.male <- filter(cps85, fe==0)
+cps85.female <- filter(cps85, fe==1)
+cps85.wh <- filter(cps85, nonwh==0 & hisp==0)
+cps85.nonwh <- filter(cps85, nonwh==1)
+cps85.hisp <- filter(cps85, hisp==1)
+
+## Table for Gender 
+cps85.genderTable <- data.frame("Mean ed" = c(mean(cps85.male$ed), mean(cps85.female$ed)),
+                                "sd ed" = c(sd(cps85.male$ed), sd(cps85.female$ed)),
+                                "Mean Hourly Wage" = c(exp(mean(cps85.male$lnwage)), exp(mean(cps85.female$lnwage))),
+                                "sd Wage" = c(sd(cps85.male$wage), sd(cps85.female$wage)),
+                                "Mean Annual Wage" = c(2000*exp(mean(cps85.male$lnwage)), 
+                                                       2000*exp(mean(cps85.female$lnwage))))
+rownames(cps85.genderTable) <- c("Male", "Female")
+colnames(cps85.genderTable) <- c("Mean", "SD", "Mean Hourly", "SD", "Mean Annual")
+save(cps85.genderTable, file="cps85.genderTable.Rdata")
+
+## Table for Race
+cps85.raceTable <- data.frame("Mean ed" = c(mean(cps85.wh$ed), mean(cps85.nonwh$ed), mean(cps85.hisp$ed)),
+                              "sd ed" = c(sd(cps85.wh$ed), sd(cps85.nonwh$ed), sd(cps85.hisp$ed)),
+                              "Mean Hourly Wage" = c(exp(mean(cps85.wh$lnwage)), exp(mean(cps85.nonwh$lnwage)),
+                                                     exp(mean(cps85.hisp$lnwage))),
+                              "sd Wage" = c(sd(cps85.wh$wage), sd(cps85.nonwh$wage), sd(cps85.hisp$wage)),
+                              "Mean Annual Wage" = c(2000*exp(mean(cps85.wh$lnwage)), 
+                                                     2000*exp(mean(cps85.nonwh$lnwage)),
+                                                     2000*exp(mean(cps85.hisp$lnwage))))
+rownames(cps85.raceTable) <- c("Whites", "NonWhites", "Hispanic")
+colnames(cps85.raceTable) <- c("Mean", "SD", "Mean Hourly", "SD", "Mean Annual")
+save(cps85.raceTable, file="cps85.raceTable.Rdata")
+
+## Table with totals for both years
+cps78.totalTable <- data.frame("Mean ed" = cps78.meanEd,
+                               "sd ed" = cps78.sdEd,
+                               "Mean Hourly Wage" = cps78.geometricMeanlnwage,
+                               "sd Wage" = sd(cps78$wage),
+                               "Mean Annual Wage" = cps78.annualGeometricMeanlnwage)
+rownames(cps78.totalTable) <- "Whole Sample"
+colnames(cps78.totalTable) <- c("Mean", "SD", "Mean Hourly", "SD", "Mean Annual")
+save(cps78.totalTable, file="cps78.totalTable.Rdata")
+cps85.totalTable <- data.frame("Mean ed" = cps85.meanEd,
+                               "sd ed" = cps85.sdEd,
+                               "Mean Hourly Wage" = cps85.geometricMeanlnwage,
+                               "sd Wage" = cps85.sdwage,
+                               "Mean Annual Wage" = cps85.annualGeometricMeanlnwage)
+rownames(cps85.totalTable) <- "Whole Sample"
+colnames(cps85.totalTable) <- c("Mean", "SD", "Mean Hourly", "SD", "Mean Annual")
+save(cps85.totalTable, file="cps85.totalTable.Rdata")
