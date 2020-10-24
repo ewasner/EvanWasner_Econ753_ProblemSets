@@ -20,6 +20,9 @@ load("cps85.genderTable.Rdata")
 load("cps85.raceTable.Rdata")
 load("cps78.totalTable.Rdata")
 load("cps85.totalTable.Rdata")
+load("cps78.logNormalTable.Rdata")
+load("cps78.normalTable.Rdata")
+load("chiTestTable.Rdata")
 ```
 
 # Part 1 - Berndt Exercises
@@ -97,3 +100,29 @@ kbl(cbind(table1d[,1:2], table1d[,6:7], "%Change"=table1d[,6]/table1d[,1]-1,
 ```
 
 ## Question 1e
+
+In question 1e, we compare how the logarithm of wages and wages themselves fit into a normal distribution. We begin by splitting the data into six brackets by standard deviations centered around the means. We then calculate the number of observations sitting within each bracket and compare the proportion of the sample size within each bracket to the proportion that would be expected from a normal distribution. From the results in Table 7, it is very clear that the proportion of observations within each standard deviation bracket of the logarithm of wages matches much better with that of a normal distribution than wages themselves.
+
+```{r, layout="l-body-outset"}
+library(knitr)
+library(kableExtra)
+
+kbl(cbind(cps78.logNormalTable, cps78.normalTable,
+          "Normal Distribution Proportions"=c(pnorm(-2),pnorm(-1)-pnorm(-2),pnorm(0)-pnorm(-1),
+                                              pnorm(1)-pnorm(0),pnorm(2)-pnorm(1),1-pnorm(2))),
+    caption="Counts and Proportions of lnwage and wage Distributions", 
+    booktabs=T, digits=2, align=rep('c', 6)) %>%
+  add_header_above(c(" ", "lnwage" = 2, "wage" = 2, " "))%>%
+  kable_styling(position = "center") %>%
+  column_spec(6,width="10em")
+```
+
+We can then run chi-squared goodness-of-fit tests for both lnwages and wages against a normal distribution. The results are given in Table 8. The null hypothesis is that the given set of values fits with a normal distribution. As expected based on the data in Table 7, for lnwage, we receive a statistic of 3.74 and a p-value of 0.59. Thus we fail to reject the null hypothesis that the data fits a normal distribution. However, again as expected, running the test on wages gives us a statistic of 85 and a p-value very close to 0, meaning we reject the null hypothesis that the data fits a normal distribution.
+
+```{r, layout="l-body-outset", warning=FALSE}
+library(knitr)
+
+kable(chiTestTable, 
+      caption="Chi-Squared Goodness-of-Fit Tests for Normal Distribution", 
+      booktabs=T, digits=2)
+```

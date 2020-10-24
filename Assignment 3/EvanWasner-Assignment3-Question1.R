@@ -207,3 +207,109 @@ cps85.totalTable <- data.frame("Mean ed" = cps85.meanEd,
 rownames(cps85.totalTable) <- "Whole Sample"
 colnames(cps85.totalTable) <- c("Mean", "SD", "Mean Hourly", "SD", "Mean Annual")
 save(cps85.totalTable, file="cps85.totalTable.Rdata")
+
+################
+## Question 1 ##
+##   PART e   ##
+################
+
+##################################################
+##            First for lnwage                  ##
+
+## Calculate mean and standard deviation of lnwage
+cps78.w <- mean(cps78$lnwage)
+cps78.s <- sd(cps78$lnwage)
+
+## Separate wage data into categories
+cps78$lnwagecat.subgroup <- cut(cps78$lnwage,
+                                breaks = c(-Inf, 
+                                           cps78.w - 2 * cps78.s,
+                                           cps78.w - cps78.s,
+                                           cps78.w,
+                                           cps78.w + cps78.s,
+                                           cps78.w + 2 * cps78.s,
+                                           Inf))
+cps78$lnwagecat <- factor(cps78$lnwagecat.subgroup,
+                          labels = c("wi<=w-2s",
+                                     "w-2s<wi<=w-s",
+                                     "w-s<wi<=w",
+                                     "w<wi<=w+s",
+                                     "w+s<wi<=w+2s",
+                                     "w+2s<wi"))
+
+## Create table with counts and proportion of sample size
+cps78.logNormalTable <- t(rbind(with(cps78, table(lnwagecat)),
+                                with(cps78, table(lnwagecat))/cps78.sampleSize))
+colnames(cps78.logNormalTable) <- c("Counts", "Proportion")
+save(cps78.logNormalTable, file="cps78.logNormalTable.Rdata")
+
+##################################################
+##            Next for wage                     ##
+
+## Calculate mean and standard deviation of wage
+cps78.w <- mean(cps78$wage)
+cps78.s <- sd(cps78$wage)
+
+## Separate wage data into categories
+cps78$wagecat.subgroup <- cut(cps78$wage,
+                              breaks = c(-Inf, 
+                                         cps78.w - 2 * cps78.s,
+                                         cps78.w - cps78.s,
+                                         cps78.w,
+                                         cps78.w + cps78.s,
+                                         cps78.w + 2 * cps78.s,
+                                         Inf))
+cps78$wagecat <- factor(cps78$wagecat.subgroup,
+                        levels = c("(-Inf,2.8]",
+                                   "(-0.453,2.8]",
+                                   "(2.8,6.06]",
+                                   "(6.06,9.32]",
+                                   "(9.32,12.6]",
+                                   "(12.6, Inf]"),
+                        labels = c("wi<=w-2s",
+                                   "w-2s<wi<=w-s",
+                                   "w-s<wi<=w",
+                                   "w<wi<=w+s",
+                                   "w+s<wi<=w+2s",
+                                   "w+2s<wi"))
+
+## Create table with counts and proportion of sample size
+cps78.normalTable <- t(rbind(with(cps78, table(wagecat)),
+                             with(cps78, table(wagecat))/cps78.sampleSize))
+colnames(cps78.normalTable) <- c("Counts", "Proportion")
+save(cps78.normalTable, file="cps78.normalTable.Rdata")
+
+## Chi-squared tests
+testlnwage <- chisq.test(cps78.logNormalTable[,1],
+                          p=c(pnorm(-2),pnorm(-1)-pnorm(-2),pnorm(0)-pnorm(-1),
+                              pnorm(1)-pnorm(0),pnorm(2)-pnorm(1),1-pnorm(2)))
+
+testwage <- chisq.test(cps78.normalTable[,1],
+                       p=c(pnorm(-2),pnorm(-1)-pnorm(-2),pnorm(0)-pnorm(-1),
+                           pnorm(1)-pnorm(0),pnorm(2)-pnorm(1),1-pnorm(2)))
+
+chiTestTable <- data.frame(Statistic=c(testlnwage$statistic,testwage$statistic),
+                           pValue=c(testlngwage$p.value,testwage$p.value))
+rownames(chiTestTable) <- c("lnwage", "wage")
+save(chiTestTable, file="chiTestTable.Rdata")
+
+## Below is just stuff I was practicing with that I want to keep
+
+# dnorm(0)
+# 
+# pnorm(0)-pnorm(-1)
+# 
+# seq(cps78.w-3*cps78.s,cps78.w+3*cps78.s, by=0.01),
+# dnorm(seq(cps78.w-3*cps78.s,cps78.w+3*cps78.s, by=0.01),
+#       mean=cps78.w,sd=cps78.s)
+# 
+# 
+# 
+# plot(seq(cps78.w-3*cps78.s,cps78.w+3*cps78.s, by=0.01),
+#      dnorm(seq(cps78.w-3*cps78.s,cps78.w+3*cps78.s, by=0.01),
+#            mean=cps78.w,sd=cps78.s))
+# 
+# ggplot(cps78, aes(x=lnwage)) + geom_density()
+# 
+# 
+# , y=densityPlot(lnwage)

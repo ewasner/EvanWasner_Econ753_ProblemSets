@@ -3,7 +3,7 @@
 ## Assignment 1, Question 2
 
 ## Set working directory
-setwd("I:/Evan/Documents/Umass/Econ 753/Assignments/Assignment 1/WP322HAP-RR-GITD-code/RR-country-csv")
+setwd("I:/Evan/Documents/Umass/Econ 753/EvanWasner_Econ753_ProblemSets/Assignment 1/WP322HAP-RR-GITD-code/RR-country-csv")
 
 ## Libraries
 library(plyr)
