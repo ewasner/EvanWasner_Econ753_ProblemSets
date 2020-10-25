@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.12)  24 OCT 2020 20:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.12)  25 OCT 2020 14:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -698,66 +698,76 @@ as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
 l.245 
-      ]
-Overfull \hbox (52.02274pt too wide) in paragraph at lines 281--303
- [][] 
- []
-
-[3pdfTeX warning (ext4): destination with the same identifier (name{table.5}) h
-as been already used, duplicate ignored
+      ] [3pdfTeX warning (ext4): destination with the same identifier (name{tab
+le.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.348 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.6
-}) has been already used, duplicate ignored
+l.362 \end{table}
+                 pdfTeX warning (ext4): destination with the same identifier (n
+ame{table.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.348 
-      ] [4pdfTeX warning (ext4): destination with the same identifier (name{tab
-le.7}) has been already used, duplicate ignored
+l.362 \end{table}
+                 ] [4pdfTeX warning (ext4): destination with the same identifie
+r (name{table.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.466 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.8
-}) has been already used, duplicate ignored
+l.483 \end{table}
+                 pdfTeX warning (ext4): destination with the same identifier (n
+ame{table.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.466 
-      ] [5pdfTeX warning (ext4): destination with the same identifier (name{tab
-le.9}) has been already used, duplicate ignored
+l.483 \end{table}
+                 ] [5pdfTeX warning (ext4): destination with the same identifie
+r (name{table.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.466 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.1
-0}) has been already used, duplicate ignored
+l.483 \end{table}
+                 pdfTeX warning (ext4): destination with the same identifier (n
+ame{table.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.466 
-      ] [6pdfTeX warning (ext4): destination with the same identifier (name{tab
-le.11}) has been already used, duplicate ignored
+l.483 \end{table}
+                 ] [6pdfTeX warning (ext4): destination with the same identifie
+r (name{table.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.558 \end{document}
+l.618 \end{document}
                     ] [7pdfTeX warning (ext4): destination with the same identi
 fier (name{table.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.558 \end{document}
+l.618 \end{document}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{table.13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.618 \end{document}
+                    ] [8pdfTeX warning (ext4): destination with the same identi
+fier (name{table.14}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.618 \end{document}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{table.15}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.618 \end{document}
                     ] (./EvanWasner-HW3.aux)
 Package rerunfilecheck Info: File `EvanWasner-HW3.out' has not changed.
-(rerunfilecheck)             Checksum: 7A0EF0AB15A2DB3F491682B3C2D9D4EC;1305.
+(rerunfilecheck)             Checksum: C97AAE0BFEC8E2ECF732A30B3637781E;1379.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 12283 strings out of 481886
- 176653 string characters out of 5930463
- 486316 words of memory out of 5000000
- 28307 multiletter control sequences out of 15000+600000
+ 12290 strings out of 481886
+ 176775 string characters out of 5930463
+ 494410 words of memory out of 5000000
+ 28310 multiletter control sequences out of 15000+600000
  584742 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,11n,66p,333b,333s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,18n,66p,333b,360s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-math
 it.enc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
 -rm.enc}{c:/Users/evanw/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
@@ -773,10 +783,10 @@ X/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/evanw/AppData/Roaming/Tin
 yTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/evanw/AppData/Roamin
 g/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/evanw/AppData/R
 oaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb>
-Output written on EvanWasner-HW3.pdf (7 pages, 181188 bytes).
+Output written on EvanWasner-HW3.pdf (8 pages, 184112 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 140 compressed objects within 2 object streams
- 42 named destinations out of 1000 (max. 500000)
+ 169 PDF objects out of 1000 (max. 8388607)
+ 147 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
  89 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,7 +1,7 @@
 ---
 title: "Econ 753 HW3"
 author: "Evan Wasner"
-date: "10/16/2020"
+date: "10/27/2020"
 output: pdf_document
 ---
 
@@ -29,6 +29,9 @@ load("cps78.demographicsTable6b.Rdata")
 load("cps78.wh.lnwage.lm1.Rdata")
 load("cps78.nonwh.lnwage.lm1.Rdata")
 load("cps78.hisp.lnwage.lm1.Rdata")
+load("panel_1.Rdata")
+load("panel_2.Rdata")
+load("panel_3.Rdata")
 ```
 
 # Part 1 - Berndt Exercises
@@ -100,7 +103,7 @@ kbl(cbind(table1d[,1:2], table1d[,6:7], "%Change"=table1d[,6]/table1d[,1]-1,
   pack_rows(index=c("Gender"=2, "Race"=3, "Total"=1)) %>%
   add_header_above(c(" ", "1978" = 2, "1985" = 2, " ", "1978" = 2, "1985" = 2, " ")) %>%
   add_header_above(c(" ", "Education" = 5, "lnWage" = 5)) %>%
-  kable_styling(position = "center")
+  kable_styling(position = "center", latex_options="scale_down")
 ```
 
 ## Question 1e
@@ -168,7 +171,7 @@ kbl(cps78.raceTable6b,
                      "Experience"=2,
                      "Female"=2,
                      "Unionized"=2,
-                     "Wages"=2))%>%
+                     "Wages"=2)) %>%
   kable_styling(position = "center")
 ```
 
@@ -188,5 +191,23 @@ stargazer(cps78.wh.lnwage.lm1, cps78.nonwh.lnwage.lm1, cps78.hisp.lnwage.lm1,
 
 I am not completing the remainder of question 6 because I have already spent 25 hours on this problem set and there are simply not enough hours in each day for me to possibly complete it. Please, for the love of God, have mercy. 
 
-# Question 2
+# Part 2 - Replication of Card and Krueger
 
+In part 2, we replicate rows 1-3 of the panel “Stores by State” of Table 3 in Card and Krueger, “Minimum Wages and Employment: A Case Study of the Fast-Food Industry in New Jersey and Pennsylvania” (AER 84(4) 1994). The results are displayed in Table 13. We begin by calculating "full-time equivalent" (FTE) employment for each store by summing the number of full-time employees, the number of managers and assistant managers, and half of the number of part-time employees (Card and Krueger counts each part-time worker as half a full-time worker). We then take averages of each state's FTE employment both before and after the rise of New Jersey's minimum wage. 
+
+```{r, layout="l-body-outset", message=FALSE}
+library(knitr)
+library(kableExtra)
+library(dplyr)
+
+cbind(panel_1[,1:4],panel_2[,2:4],panel_3[,2:3]) %>%
+  mutate_all(linebreak,align="c") %>%
+  kable("latex",
+      caption="Replication of Rows 1-3 of Table 1 of Card and Krueger", 
+      booktabs=T, escape=F) %>%
+  add_header_above(c(" ", 
+                     "Stores By State"=3, 
+                     "Stores in NJ"=3,
+                     "Differences in NJ"=2)) %>%
+  kable_styling(position = "center", latex_options="scale_down")
+```
