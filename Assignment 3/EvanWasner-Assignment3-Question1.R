@@ -289,7 +289,7 @@ testwage <- chisq.test(cps78.normalTable[,1],
                            pnorm(1)-pnorm(0),pnorm(2)-pnorm(1),1-pnorm(2)))
 
 chiTestTable <- data.frame(Statistic=c(testlnwage$statistic,testwage$statistic),
-                           pValue=c(testlngwage$p.value,testwage$p.value))
+                           pValue=c(testlnwage$p.value,testwage$p.value))
 rownames(chiTestTable) <- c("lnwage", "wage")
 save(chiTestTable, file="chiTestTable.Rdata")
 
@@ -313,3 +313,74 @@ save(chiTestTable, file="chiTestTable.Rdata")
 # 
 # 
 # , y=densityPlot(lnwage)
+
+################
+## Question 6 ##
+##   PART a   ##
+################
+
+cps78.lnwage.lm1 <- lm(lnwage ~ fe + union + nonwh + hisp + ed + ex + exsq, data=cps78)
+save(cps78.lnwage.lm1, file="cps78.lnwage.lm1.Rdata")
+
+linearHypothesis(cps78.lnwage.lm1, c("nonwh = hisp"))
+
+################
+## Question 6 ##
+##   PART b   ##
+################
+
+## Counts table
+cps78.demographicsTable6b <- data.frame(Mean = c(1-cps78.nonwh.mean-cps78.hisp.mean, 
+                                                 cps78.nonwh.mean, 
+                                                 cps78.hisp.mean),
+                                        Count = c((1-cps78.nonwh.mean-cps78.hisp.mean)*cps78.sampleSize,
+                                                  cps78.nonwh.count, 
+                                                  cps78.hisp.count))
+rownames(cps78.demographicsTable6b) <- c("other", "nonwh", "hisp")
+save(cps78.demographicsTable6b, file="cps78.demographicsTable6b.Rdata")
+
+
+cps78.raceTable6b <- rbind(with(cps78.wh, data.frame(ed=mean(ed),
+                                                     diff=mean(ed)-mean(cps78.wh$ed),
+                                                     ex=mean(ex),
+                                                     diff=mean(ex)-mean(cps78.wh$ex),
+                                                     fe=mean(fe),
+                                                     diff=mean(fe)-mean(cps78.wh$fe),
+                                                     union=mean(union),
+                                                     diff=mean(union)-mean(cps78.wh$union),
+                                                     lnwage=mean(lnwage),
+                                                     diff=mean(lnwage)-mean(cps78.wh$lnwage))),
+                           with(cps78.nonwh, data.frame(ed=mean(ed),
+                                                        diff=mean(ed)-mean(cps78.wh$ed),
+                                                        ex=mean(ex),
+                                                        diff=mean(ex)-mean(cps78.wh$ex),
+                                                        fe=mean(fe),
+                                                        diff=mean(fe)-mean(cps78.wh$fe),
+                                                        union=mean(union),
+                                                        diff=mean(union)-mean(cps78.wh$union),
+                                                        lnwage=mean(lnwage),
+                                                        diff=mean(lnwage)-mean(cps78.wh$lnwage))),
+                           with(cps78.hisp, data.frame(ed=mean(ed),
+                                                       diff=mean(ed)-mean(cps78.wh$ed),
+                                                       ex=mean(ex),
+                                                       diff=mean(ex)-mean(cps78.wh$ex),
+                                                       fe=mean(fe),
+                                                       diff=mean(fe)-mean(cps78.wh$fe),
+                                                       union=mean(union),
+                                                       diff=mean(union)-mean(cps78.wh$union),
+                                                       lnwage=mean(lnwage),
+                                                       diff=mean(lnwage)-mean(cps78.wh$lnwage))))
+rownames(cps78.raceTable6b) <- c("Others", "NonWhites", "Hispanic")
+save(cps78.raceTable6b, file="cps78.raceTable6b.Rdata")
+
+################
+## Question 6 ##
+##   PART c   ##
+################
+
+cps78.wh.lnwage.lm1 <- lm(lnwage ~ fe + union + ed + ex + exsq, data=cps78.wh)
+cps78.nonwh.lnwage.lm1 <- lm(lnwage ~ fe + union + ed + ex + exsq, data=cps78.nonwh)
+cps78.hisp.lnwage.lm1 <- lm(lnwage ~ fe + union + ed + ex + exsq, data=cps78.hisp)
+save(cps78.wh.lnwage.lm1, file="cps78.wh.lnwage.lm1.Rdata")
+save(cps78.nonwh.lnwage.lm1, file="cps78.nonwh.lnwage.lm1.Rdata")
+save(cps78.hisp.lnwage.lm1, file="cps78.hisp.lnwage.lm1.Rdata")

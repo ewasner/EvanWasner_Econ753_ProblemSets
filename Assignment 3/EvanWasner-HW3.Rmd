@@ -23,11 +23,15 @@ load("cps85.totalTable.Rdata")
 load("cps78.logNormalTable.Rdata")
 load("cps78.normalTable.Rdata")
 load("chiTestTable.Rdata")
+load("cps78.lnwage.lm1.Rdata")
+load("cps78.raceTable6b.Rdata")
+load("cps78.demographicsTable6b.Rdata")
+load("cps78.wh.lnwage.lm1.Rdata")
+load("cps78.nonwh.lnwage.lm1.Rdata")
+load("cps78.hisp.lnwage.lm1.Rdata")
 ```
 
 # Part 1 - Berndt Exercises
-
-Should summarize all of quesiton 1 here
 
 ## Question 1a
 
@@ -126,3 +130,63 @@ kable(chiTestTable,
       caption="Chi-Squared Goodness-of-Fit Tests for Normal Distribution", 
       booktabs=T, digits=2)
 ```
+
+## Question 6a
+
+For exercise 6, we begin by regressing lnwage on dummy variables for whether a worker is female, in a union, Black, Hispanic, and on variables for years of education and experience (allowing for a quadratic effect of experience). The results are given in Table 9. The interpretation of the coefficients on nonwh and hisp are wage premiums (in percentage terms) for Blacks and Hispanics compared to Whites controlling for gender, unionization, education and experience. According to this regression, Blacks on average have wages 16% lower than Whites, which is statistically significant. The negative premium for Hispanics, however, is not statistically significant (-2.7%). 
+
+```{r results = "asis", message=FALSE, layout="l-body-outset"}
+library(stargazer)
+stargazer(cps78.lnwage.lm1, type = "latex", style = "default", intercept.bottom = FALSE, header=FALSE,
+          title="Simple Regression of log Wages to Determine Wage Discrimination")
+```
+
+In order to test the hypothesis that the coefficients on nonwh and hisp are equal to each other but not necessarily zero, we run a Chow test to test the linear hypothesis: "nonwh - hisp = 0". If we reject the null hypothesis, then the coefficients are not equal to each other and not 0. The results of the Chow test are a F-statistic of 2.46 and a p-value of 0.12, which means we fail to reject the null hypothesis at a 10% confidence level. Therefore, we cannot reject the hypothesis that the premiums for Blacks and Hispanics are equal and/or both 0. 
+
+## Question 6b
+
+In 6b, we separate the data by race. First, we observe the fraction of the data source in each category, shown in Table 10. The majority of the sample is white (83%), with 10% of the sample Black and 7% Hispanic.
+
+```{r, layout="l-body-outset"}
+library(knitr)
+kable(cps78.demographicsTable6b, 
+      caption="Means and Number of Individuals in Demographic Groups", 
+      booktabs=T, digits=2)
+```
+
+In Table 11, the means of several variables calculated by racial group is displayed, as well as the difference between each mean with those of Whites. The first thing to notice is that Whites on average have the highest wages. On average, Whites have the most education but the least experience. Blacks have 20% lower wages than those of Whites despite having several more years of experience and having a higher proportion of workers in unions. However, the Black population of the sample also has a higher percentage of females, and so the negative wage premium may also be including the negative premium for women. While Histpanics have less experience, education, rates of unionization, and percentage of females compared to Blacks, they have less of a negative premium than Blacks (-18%).
+
+```{r, layout="l-body-outset"}
+library(knitr)
+library(kableExtra)
+
+kbl(cps78.raceTable6b,
+    caption="Comparison of Demographics Variables", 
+    booktabs=T, digits=2) %>%
+  add_header_above(c(" ", 
+                     "Education"=2, 
+                     "Experience"=2,
+                     "Female"=2,
+                     "Unionized"=2,
+                     "Wages"=2))%>%
+  kable_styling(position = "center")
+```
+
+## Question 6c
+
+In part c, we run three separate regressions of lnwage for the different racial data subsets. In this way, we are able to observe any differences in the effects of different variables by race. The results are given in Table 12. There are differences in the coefficients across races. For education, each year of education has 7% impact on wages for others, but that reduces to a 5.5% impact on wages for nonwhites and Hispanics. For others, each year of experience provides a statistically significant 3% impact on wages for others, but the coefficients on experience cease to be statistically significant for nonwhites and others. There is a negative impact for being female across all racial groups, but this impact is only statistically significant for others and Hispanics. Being in a union provides a positive impact on wages across all racial groups, but is not statistically significant for nonwhites. The effect of being in a union is strongest for Hispanics, indicating a 42% impact on wages. An interpretation of these results may be that, for nonwhites and Hispanics, employers may assume that experience and education do not provide as much as they do for others.
+
+```{r results = "asis", message=FALSE, layout="l-body-outset"}
+library(stargazer)
+stargazer(cps78.wh.lnwage.lm1, cps78.nonwh.lnwage.lm1, cps78.hisp.lnwage.lm1,
+          type = "latex", style = "default", intercept.bottom = FALSE, header=FALSE,
+          title="Regressions of lnwage by Racial Category",
+          column.labels = c("Others", "NonWhites", "Hispanics"))
+```
+
+## Questions 6d-h
+
+I am not completing the remainder of question 6 because I have already spent 25 hours on this problem set and there are simply not enough hours in each day for me to possibly complete it. Please, for the love of God, have mercy. 
+
+# Question 2
+
