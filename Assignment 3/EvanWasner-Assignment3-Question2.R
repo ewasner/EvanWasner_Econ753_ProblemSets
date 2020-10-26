@@ -126,9 +126,12 @@ w.std<-w.std%>% pivot_wider(names_from=wage_cat, values_from=std.fte2)
 ## Add the standard error of the differences
 
 ## Panel 1 differences standard errors
-diff_within_state<-c(1, t.test(ftePA0,ftePA1)$stderr, t.test(fteNJ0,fteNJ1)$stderr,t.test(fteNJ0-fteNJ1,ftePA0-ftePA1)$stderr)
+diff_within_state<-c(1, t.test(fteNJ0,fteNJ1)$stderr, t.test(ftePA0,ftePA1)$stderr,t.test(fteNJ0-fteNJ1,ftePA0-ftePA1)$stderr)
 diff_between_state<-c(t.test(fteNJ0,ftePA0)$stderr,t.test(fteNJ1,ftePA1)$stderr)
 
+## Tried with manual formula, get the same results as using the t-test
+sqrt(var(fteNJ0,na.rm=TRUE)/length(fteNJ0[!is.na(fteNJ0)])+var(ftePA0,na.rm=TRUE)/length(ftePA0[!is.na(ftePA0)]))
+sqrt(var(ftePA0,na.rm=TRUE)/length(ftePA0[!is.na(ftePA0)])+var(ftePA1,na.rm=TRUE)/length(ftePA1[!is.na(ftePA1)]))
 
 ## Panel 2 differences standard errors
 diff_within_wagecat<-c(t.test(fteNJ0L,fteNJ1L)$stderr,t.test(fteNJ0M,fteNJ1M)$stderr,t.test(fteNJ0H,fteNJ1H)$stderr)
