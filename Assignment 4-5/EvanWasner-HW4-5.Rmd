@@ -1,0 +1,71 @@
+---
+title: "Econ 753 HW4-5"
+author: "Evan Wasner"
+date: "11/8/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+``` {r}
+load("flowsData.melt.Rdata")
+load("rates.melt.Rdata")
+load("adfTest.df.Rdata")
+```
+
+# Problem Set 4
+
+Problem set 4 goes here...
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Internal Funds and Net Increase in Labilities per Fixed Investment Over Time"}
+library(tidyverse)
+ggplot(flowsData.melt, aes(x=Year, y=Flow, color= Flow_Type)) + 
+  geom_line(size=1) +
+  scale_x_continuous(breaks=c(1950,1960,1970,1980,1990,2000,2010,2020)) +
+  scale_color_discrete(name="Flow Type",
+                       labels=c("Internal Funds\n/ Fixed Investment",
+                                "Net Increase\nin Liabilities\n/ Fixed Investment")) +
+  theme_bw()
+```
+
+# Problem Set 5 - Granger Causality Test
+
+The Granger Causality Test is a regression of Y on lagged values of X, controlling for lagged values of Y. The null hypothesis is that X does not "Granger-cause" Y, i.e. lagged values of X are not correlated with present values of Y, controlling for past values of Y. The test can also be run in reverse, i.e. whether Y "Granger-causes" X. While it is generally impossible to test true "causality", the Granger Causality Test can test whether X precedes Y in time or visa versa. 
+
+In PS5, we use the Granger Causality Test to answer the question: does the Federal Reserve control interest rates? In order to target interest rates, the Federal Reserve maintains direct control over the Discount Rate and performs "open market operations" to determine its one true target interest rate, the Federal Funds Rate. Theoretically, raising or lowering the Federal Funds Rate should sprinkle through the economy to raise and lower other interest rates. Interest rate "exogeniety" (i.e. the ability for the Central Bank to directly control "the" interest rate) is an important assumption in much of neoclassical macroeconomic theory. In order to test for Granger-causality, we test whether the Federal Funds Rate Granger-causes the BAA corporate bond yield rate --- which has a 10 year maturity and thus is not a short-term interest rate --- from March of 1963 to the present. This time period contains business cycle troughs over seven full cycles. 
+
+Since regressions often reveal false correlations with non-stationary variables, the first step to answer our question is to determine whether the Federal Funds Rate and BAA rates are stationary. First, we plot these rates over time in Figure 2. It seems that there is no persistent trend and that neither variable seems stationary, as the distribution over time for both series does not seem constant. However, the Augmented Dicky-Fuller (ADF) test provides a formal method for testing for unit roots. 
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Federal Funds Rate and BAA Rate Over Time"}
+library(tidyverse)
+ggplot(rates.melt, aes(x=date, y=Rate, color=Measurement)) + 
+  geom_line(size=1) +
+  scale_x_date(name="Date") +
+  scale_color_discrete(name="Rate",
+                       labels=c("Federal\nFunds Rate",
+                                "BAA Rate")) +
+  theme_bw()
+```
+
+We conduct an ADF test on both the Federal Funds Rate and the BAA rate and give the results in Table 1. ADF tests can be run with three specifications: whether the model contains no drift and no trend, a drift and no trend, or a drift and trend. The ADF test also needs a "lag" input, which is the number of time observations prior to the present which might affect the present observation (or, in the case of the ADF test, change in the present observation). In each rate, we should expect no drift and no trend in the rates. Nonetheless, all of the formulations for several lag values are given in table 1. We can see that, no matter the specification and number of lags, the p-values are very high for the BAA rate and fairly high enough above 0.05 for us to fail to reject the null hypothesis --- that there is no unit root for each variable. Thus, both of our variables are not stationary.
+
+```{r, layout="l-body-outset", warning=FALSE, message=FALSE}
+library(knitr)
+library(kableExtra)
+
+kbl(adfTest.df, 
+    digits=2,
+    caption = "Augmented Dicky-Fuller Test on Federal Funds Rate",
+    booktabs = T) %>%
+  add_header_above(c(" "=1, "No Drift & No Trend"=2, "Drift & No Trend"=2, "Drift & Trend"=2,
+                     "No Drift & No Trend"=2, "Drift & No Trend"=2, "Drift & Trend"=2)) %>%
+  add_header_above(c(" "=1, "BAA Rate"=6, "Federal Funds Rate"=6)) %>%
+  kable_styling(position = "center", latex_options="scale_down")
+
+
+```
+
+We therefore have to first-difference both variables and re-run the test for stationarity. 
