@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ``` {r}
 load("flowsData.melt.Rdata")
+load("flowsData.totals.melt.Rdata")
 load("rates.melt.Rdata")
 load("drates.melt.Rdata")
 load("adfTest.df.Rdata")
@@ -21,9 +22,9 @@ load("grangerTable.Rdata")
 
 # Problem Set 4
 
-Problem set 4 goes here...
+In PS4, we analyze flow of funds accounting data from the Federal Reserve. The Fed releases aggregate flow of funds accounting data in a myriad of tables. In this exercise, we pulled the following data from the Fed database: total internal funds, fixed investment, and net increase in liabilities. We divide total internal funds and net increase in liabilities by fixed investment and plot the results over the time period 1950-present in Figure 1. 
 
-```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Internal Funds and Net Increase in Labilities per Fixed Investment Over Time"}
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Internal Funds and Net Increase in Labilities per Fixed Investment 1950-Present"}
 library(tidyverse)
 ggplot(flowsData.melt, aes(x=Year, y=Flow, color= Flow_Type)) + 
   geom_line(size=1) +
@@ -31,6 +32,33 @@ ggplot(flowsData.melt, aes(x=Year, y=Flow, color= Flow_Type)) +
   scale_color_discrete(name="Flow Type",
                        labels=c("Internal Funds\n/ Fixed Investment",
                                 "Net Increase\nin Liabilities\n/ Fixed Investment")) +
+  theme_bw()
+```
+
+While there is not an entirely clear relationship between the two, generally increases in liabilities tend to overlap with decreases in internal funding, and visa versa. This makes sense, as firms which experience a decrease in internal funding would likely need to seek credit from financial markets in order to fulfill their investment needs. Another pattern seems to be that liabilities tend to increase before recessions and decrease at the beginning of recessions. This pattern can be more clearly seen in Figure 2, where we zoom in on the time period 1990-present.
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Internal Funds and Net Increase in Labilities per Fixed Investment 1990-Present"}
+library(tidyverse)
+ggplot(filter(flowsData.melt,Year>1990), aes(x=Year, y=Flow, color= Flow_Type)) + 
+  geom_line(size=1) +
+  scale_color_discrete(name="Flow Type",
+                       labels=c("Internal Funds\n/ Fixed Investment",
+                                "Net Increase\nin Liabilities\n/ Fixed Investment")) +
+  theme_bw()
+```
+
+We can see from Figure 2 that liabilities increase dramatically throughout the period of the Dot-com bubble (1995-2000) --- as firms borrowed excessively in order to conduct large mergers --- and fell precipitously following the bursting of the bubble in 2000. Similarly, liabilities increased prior to the 2008 crash and fell precipitously following the bursting of the real estate bubble. This pattern is consistent with Hyman Minsky's theory of financial instability, which posits that booms tend engender a buildup of leverage in financial markets, which weakens the economy's ability to absorb shocks, thus leading to financial crises and recessions which precede a new cycle of a buildup of leverage.
+
+These data series can help shed light on the relative importance of factors such as cash flow and the Q ratio in determining investment activity in the U.S. A general scan of the data suggests that, as noted above, decreases in cash flows tend to precede recessions, where investment levels fall. This can be seen more clearly in Figure 3, where total internal funds, net increases in liabilities, and fixed investment levels are plotted from 1990-present. In Figure 3, we can directly see investment levels fall after slow downs in cash flows and increases in liabilities in the years prior to the 2000 and 2008 crashes. Furthermore, Tobin's Q ratio --- which expresses the relation between market value and intrinsic value --- is likely to rise during periods when decreasing cash flows overlap with increased borrowing, which, as noted above, precede periods of recession and falls in investment.
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Internal Funds, Increase in Labilities, and Fixed Investment 1990-Present"}
+library(tidyverse)
+ggplot(flowsData.totals.melt, aes(x=Year, y=Flow, color= Flow_Type)) + 
+  geom_line(size=1) +
+  scale_color_discrete(name="Flow Type",
+                       labels=c("Internal Funds",
+                                "Net Increase\nin Liabilities",
+                                "Fixed Investment")) +
   theme_bw()
 ```
 
@@ -42,7 +70,7 @@ In PS5, we use the Granger Causality Test to answer the question: does the Feder
 
 ## Stationarity
 
-Since regressions often reveal false correlations with non-stationary variables, the first step to answer our question is to determine whether the Federal Funds Rate and BAA rates are stationary. First, we plot these rates over time in Figure 2. It seems that there is no persistent trend and that neither variable seems stationary, as the distribution over time for both series does not seem constant. However, the Augmented Dicky-Fuller (ADF) test provides a formal method for testing for unit roots. 
+Since regressions often reveal false correlations with non-stationary variables, the first step to answer our question is to determine whether the Federal Funds Rate and BAA rates are stationary. First, we plot these rates over time in Figure 4. It seems that there is no persistent trend and that neither variable seems stationary, as the distribution over time for both series does not seem constant. However, the Augmented Dicky-Fuller (ADF) test provides a formal method for testing for unit roots. 
 
 ```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Federal Funds Rate and BAA Rate Over Time"}
 library(tidyverse)
@@ -71,7 +99,7 @@ kbl(adfTest.df,
   kable_styling(position = "center", latex_options="scale_down")
 ```
 
-We therefore have to first-difference both variables and re-run the test for stationarity. The differenced rates are plotted in Figure 3. By visual inspection, each variable seems stationary, as each hovers around 0 without drifting. We re-run the ADF test, with the results given in Table 2. Now, after differencing, the p-values for each variable for all specifications are less than 0.02, which means we can safely reject the null hypothesis that there is a unit root for each variable. Thus, each variable is now stationary.
+We therefore have to first-difference both variables and re-run the test for stationarity. The differenced rates are plotted in Figure 5. By visual inspection, each variable seems stationary, as each hovers around 0 without drifting. We re-run the ADF test, with the results given in Table 2. Now, after differencing, the p-values for each variable for all specifications are less than 0.02, which means we can safely reject the null hypothesis that there is a unit root for each variable. Thus, each variable is now stationary.
 
 ```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Differenced Federal Funds Rate and BAA Rate Over Time"}
 library(tidyverse)
@@ -129,3 +157,4 @@ However, these conclusions change when we zoom into specific time periods. When 
 
 The interpretation I take from these results is that, overall, there is no evidence for interest rate exogeneity, i.e. that the Federal Reserve controls interest rates. Besides the apt question of what "the" interest rate means in neoclassical theory --- there are variegated interest rates over multiple maturities, and we simply choose the 10-year BAA rate to examine in this exercise --- the evidence suggests that the level of interest rate exogeneity changes over time and in fact often exhibits reverse and/or simultaneous causality. The fact that the most recent period examined exhibits Federal Reserve control over the BAA rate may have to do with historically low interest rates continuously targetted by the Federal Reserve, coupled with unprecedented monetary policy in quantitative easing operations. However, past periods show that it might in fact have been the Federal Reserve which responded to interest rates set in financial markets, and that during other periods the Federal Reserve simply could not keep pace with nor push interest rates in the direction it wanted. Overall, hese results are consistent with the "structuralist" Post-Keynesian school, which questions orthodox theory on both interest rate exogeneity and exogeneity of the money supply.
 
+# Replication Paper

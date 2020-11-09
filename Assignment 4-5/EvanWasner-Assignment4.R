@@ -30,3 +30,10 @@ flowsData.melt <- melt(flowsData,
                        variable.name = "Flow_Type",
                        value.name = "Flow")
 save(flowsData.melt, file="flowsData.melt.Rdata")
+
+flowsData.totals.melt <- melt(filter(flowsData,Year>1990), 
+                              id="Year", 
+                              measure.vars=c("Total_Internal_Funds","Net_Increase_Liabilities","FI"),
+                              variable.name = "Flow_Type",
+                              value.name = "Flow")
+save(flowsData.totals.melt, file="flowsData.totals.melt.Rdata")
