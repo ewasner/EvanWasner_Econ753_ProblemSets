@@ -13,7 +13,10 @@ knitr::opts_chunk$set(echo = FALSE)
 ``` {r}
 load("flowsData.melt.Rdata")
 load("rates.melt.Rdata")
+load("drates.melt.Rdata")
 load("adfTest.df.Rdata")
+load("adfTest.diff.df.Rdata")
+load("grangerTable.Rdata")
 ```
 
 # Problem Set 4
@@ -37,6 +40,8 @@ The Granger Causality Test is a regression of Y on lagged values of X, controlli
 
 In PS5, we use the Granger Causality Test to answer the question: does the Federal Reserve control interest rates? In order to target interest rates, the Federal Reserve maintains direct control over the Discount Rate and performs "open market operations" to determine its one true target interest rate, the Federal Funds Rate. Theoretically, raising or lowering the Federal Funds Rate should sprinkle through the economy to raise and lower other interest rates. Interest rate "exogeniety" (i.e. the ability for the Central Bank to directly control "the" interest rate) is an important assumption in much of neoclassical macroeconomic theory. In order to test for Granger-causality, we test whether the Federal Funds Rate Granger-causes the BAA corporate bond yield rate --- which has a 10 year maturity and thus is not a short-term interest rate --- from March of 1963 to the present. This time period contains business cycle troughs over seven full cycles. 
 
+## Stationarity
+
 Since regressions often reveal false correlations with non-stationary variables, the first step to answer our question is to determine whether the Federal Funds Rate and BAA rates are stationary. First, we plot these rates over time in Figure 2. It seems that there is no persistent trend and that neither variable seems stationary, as the distribution over time for both series does not seem constant. However, the Augmented Dicky-Fuller (ADF) test provides a formal method for testing for unit roots. 
 
 ```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Federal Funds Rate and BAA Rate Over Time"}
@@ -58,14 +63,69 @@ library(kableExtra)
 
 kbl(adfTest.df, 
     digits=2,
-    caption = "Augmented Dicky-Fuller Test on Federal Funds Rate",
+    caption = "Augmented Dicky-Fuller Test on Federal Funds Rate and BAA Rate",
     booktabs = T) %>%
   add_header_above(c(" "=1, "No Drift & No Trend"=2, "Drift & No Trend"=2, "Drift & Trend"=2,
                      "No Drift & No Trend"=2, "Drift & No Trend"=2, "Drift & Trend"=2)) %>%
   add_header_above(c(" "=1, "BAA Rate"=6, "Federal Funds Rate"=6)) %>%
   kable_styling(position = "center", latex_options="scale_down")
-
-
 ```
 
-We therefore have to first-difference both variables and re-run the test for stationarity. 
+We therefore have to first-difference both variables and re-run the test for stationarity. The differenced rates are plotted in Figure 3. By visual inspection, each variable seems stationary, as each hovers around 0 without drifting. We re-run the ADF test, with the results given in Table 2. Now, after differencing, the p-values for each variable for all specifications are less than 0.02, which means we can safely reject the null hypothesis that there is a unit root for each variable. Thus, each variable is now stationary.
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Differenced Federal Funds Rate and BAA Rate Over Time"}
+library(tidyverse)
+ggplot(drates.melt, aes(x=date, y=Rate, color=Measurement)) + 
+  geom_line(size=0.5) +
+  scale_x_date(name="Date") +
+  scale_color_discrete(name="Rate",
+                       labels=c("Federal\nFunds Rate",
+                                "BAA Rate")) +
+  theme_bw()
+```
+
+```{r, layout="l-body-outset", warning=FALSE, message=FALSE}
+library(knitr)
+library(kableExtra)
+
+kbl(adfTest.diff.df, 
+    digits=2,
+    caption = "Augmented Dicky-Fuller Test on Differenced Federal Funds Rate and BAA Rate",
+    booktabs = T) %>%
+  add_header_above(c(" "=1, "No Drift & No Trend"=2, "Drift & No Trend"=2, "Drift & Trend"=2,
+                     "No Drift & No Trend"=2, "Drift & No Trend"=2, "Drift & Trend"=2)) %>%
+  add_header_above(c(" "=1, "BAA Rate"=6, "Federal Funds Rate"=6)) %>%
+  kable_styling(position = "center", latex_options="scale_down")
+```
+
+## Granger-Causality Test
+
+After first-differencing the data to ensure stationarity, we then run the Granger-Causality test. The results are given in Table 3. We run the test in both directions, i.e. whether the Federal Funds Rate Granger-causes the BAA rate and whether the BAA rate Granger-causes the Federal Funds Rate. The tests were run for various lag indices, with Table 3 showing the results for lags of one month, four months, eight months, and one year. The tests were also run on different time periods: the full range of dates (1963-present), one full cycle from 1973-1981, another full cycle from 2001-2008, and from the 2008 recession to the present. The two full business cycles were chosen to match with the two full business cycles tested in Pollin 2008, "Considerations on Interest Rate Exogeneity".
+
+```{r, layout="l-body-outset", warning=FALSE, message=FALSE}
+library(knitr)
+library(kableExtra)
+
+kbl(grangerTable,
+    digits=2,
+    caption="Granger Causality Test of the Federal Funds Rate and BAA Rate",
+    booktabs=T) %>%
+  pack_rows(index=c("Null Hypothesis: BAA Rate Does Not Cause Federal Funds Rate"=nrow(grangerTable)/2,
+                    "Null Hypothesis: Federal Funds Rate Does Not Cause BAA Rate"=nrow(grangerTable)/2)) %>%
+        add_header_above(c(" "=1, 
+                     "1963.03-Present"=2,
+                     "1973.11-1981.06"=2,
+                     "2001.03-2008.02"=2,
+                     "2008.03-Present"=2)) %>%
+  add_header_above(c(" "=1,
+                     "Seven Full Cycles"=2,
+                     "Particular Full Cycles"=4,
+                     "Recent Years"=2))
+```
+
+When first looking at the results for the full range of dates, we fail to reject the null hypothesis that BAA rates do not Granger-cause the Federal Funds Rate for all lag indices. This runs directly counter to the idea of interest rate exogeneity, which instead posits that the Federal Funds Rate should precede BAA rates. However, we also fail to reject the null hypothesis in the reverse direction for lag indices of eight months and one year. Thus, when analyzing the full range of dates, the Granger-Causality Test indicates simultaneous causality for the Federal Funds Rate and BAA rates, although there is a stronger case for BAA rates Granger-causling the Federal Funds Rate.
+
+However, these conclusions change when we zoom into specific time periods. When we look into the 1973-1981 cycle, the tests again indicate that BAA rates Granger-cause the Federal Funds Rate, but we fail to reject the null hypothesis that the Federal Funds Rate does not Granger-cause BAA rates for all lag periods except for one year. These results are reversed when we look at the period of 2008-present, as the Federal Funds Rate Granger-causes BAA rates while we fail to reject the null hypothesis that BAA rates do not Granger-cause the Federal Funds Rate. Furthermore, we fail to reject the null hypothesis of both directions of causality when examining the 2001-2008 period. These results all align with those in Pollin 2008.
+
+The interpretation I take from these results is that, overall, there is no evidence for interest rate exogeneity, i.e. that the Federal Reserve controls interest rates. Besides the apt question of what "the" interest rate means in neoclassical theory --- there are variegated interest rates over multiple maturities, and we simply choose the 10-year BAA rate to examine in this exercise --- the evidence suggests that the level of interest rate exogeneity changes over time and in fact often exhibits reverse and/or simultaneous causality. The fact that the most recent period examined exhibits Federal Reserve control over the BAA rate may have to do with historically low interest rates continuously targetted by the Federal Reserve, coupled with unprecedented monetary policy in quantitative easing operations. However, past periods show that it might in fact have been the Federal Reserve which responded to interest rates set in financial markets, and that during other periods the Federal Reserve simply could not keep pace with nor push interest rates in the direction it wanted. Overall, hese results are consistent with the "structuralist" Post-Keynesian school, which questions orthodox theory on both interest rate exogeneity and exogeneity of the money supply.
+
