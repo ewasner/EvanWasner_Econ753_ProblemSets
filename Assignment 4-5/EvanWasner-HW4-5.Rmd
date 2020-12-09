@@ -18,6 +18,8 @@ load("drates.melt.Rdata")
 load("adfTest.df.Rdata")
 load("adfTest.diff.df.Rdata")
 load("grangerTable.Rdata")
+load("NO2ConcentrationTable.Rdata")
+load("comparisonTable.Rdata")
 ```
 
 # Problem Set 4
@@ -158,3 +160,43 @@ However, these conclusions change when we zoom into specific time periods. When 
 The interpretation I take from these results is that, overall, there is no evidence for interest rate exogeneity, i.e. that the Federal Reserve controls interest rates. Besides the apt question of what "the" interest rate means in neoclassical theory --- there are variegated interest rates over multiple maturities, and we simply choose the 10-year BAA rate to examine in this exercise --- the evidence suggests that the level of interest rate exogeneity changes over time and in fact often exhibits reverse and/or simultaneous causality. The fact that the most recent period examined exhibits Federal Reserve control over the BAA rate may have to do with historically low interest rates continuously targetted by the Federal Reserve, coupled with unprecedented monetary policy in quantitative easing operations. However, past periods show that it might in fact have been the Federal Reserve which responded to interest rates set in financial markets, and that during other periods the Federal Reserve simply could not keep pace with nor push interest rates in the direction it wanted. Overall, hese results are consistent with the "structuralist" Post-Keynesian school, which questions orthodox theory on both interest rate exogeneity and exogeneity of the money supply.
 
 # Replication Paper
+
+I will replicate the paper titled "National Patterns in Environmental Injustice and Inequality: Outdoor $NO_2$ Air Pollution in the United States (2014)" by Clark et al. The paper describes spatial patterns in environmental injustice and inequality based on nitrogen dioxide ($NO_2$) concentrations in the United States. The paper uses data from "National Satellite-Based Land-Use Regression: NO2 in the United States (2011)" (from similar authors), which estimates year-2006 satellite data $NO_2$ concentrations using LUR regression and matches these concentrations to year-2000 census block groups (BG). As census block groups are the smallest Census geography with publicly available demographic data, the authors are able to compare $NO_2$ concentrations for different demographic groups.
+
+The paper calculates population-weighted mean $NO_2$ concentrations by race-ethnicity, poverty status, household income, education status, and age, using annual mean BG concentrations (from year-2006 LUR data) and population estimates (from year-2000 Census data). $NO_2$ concentrations are measured in parts per billion (ppb). 
+
+One major problem I have run into thus far is that I believe I do not have the correct dataset with the LUR regression estimations of $NO_2$ BG concentrations. In brief sum, the 2011 paper with the LUR $NO_2$ estimations provides a broken url which is supposed to contain the data, and the only dataset I could locate comes from a more recent LUR regression estimate of $NO_2$ concentrations, which (I believe) gives slightly different estimates. For example, in their paper, they mention that the mean BG $NO_2$ concentration (not weighted by population) is 11.4, while the mean BG $NO_2$ concentration I calculate is 11.59. This furthermore causes all of my population-weighted $NO_2$ concentrations to be slightly off of their values. However, so far, the values I have calculated are similar to theirs and provide the same conclusions. I will continue with the replication even though my numbers will be slightly off due to the difference in data.
+
+The results I have replicated so far are given in Tables 4 and 5. In Table 4, population-weighted mean $NO_2$ concentrations are given by race, poverty level, household income, and education level, with each of those broken down by urban/rural/mixed BG status. The most immediate statistic that stands out is that population-weighted mean $NO_2$ concentrations are 3.98 ppb (32%) higher for nonwhites than for whites. This is consistent with the results reached in the original paper, as they calculate a 4.6 ppb (38%) difference. This difference has significant consequences, as the authors estimate (based on the 4.6 ppb difference) that reducing nonwhites’ $NO_2$ concentrations to levels experienced by whites would reduce Ischemic Heart Disease (IHD) mortality by ~7,000 deaths per year. 
+
+Furthermore, the population-weighted mean $NO_2$ concentrations are higher for households below the poverty level than for those above, and (correspondingly) lower the further up the income ladder. Surprisingly, the population-weighted mean $NO_2$ concentrations are higher for people with high school degrees or more than for people without high school degrees, but this might be because people with more education are more likely to live in cities. In general --- as would be expected --- urban areas face significantly higher $NO_2$ concentrations than rural areas. Table 5 directly compares population-weighted mean $NO_2$ concentrations for specific groups. Tables 4 and 5 correspond to the original paper's Tables 1 and 2, respectively.
+
+I have a great deal of calculations left to perform. My remaining tasks are to compute the population-weighted mean $NO_2$ concentrations for more demographic groups, run regressions on $NO_2$ concentrations by income for different demographic groups, and construct environmental injustice and environmental inequality indices from the data. However, the bulk of the heavy lifting has been done, as I am now familiar with the data and how the calculations are made.
+
+\newpage
+
+```{r, layout="l-body-outset", warning=FALSE, message=FALSE}
+library(knitr)
+library(kableExtra)
+
+kbl(NO2ConcentrationTable,
+    digits=2,
+    caption="Population-weighted mean $NO_2$ concentration in ppb",
+    booktabs=T) %>%
+    pack_rows(index=c(" "=1,
+                      "Race"=2,
+                      "Poverty Level"=2,
+                      "Income"=5,
+                      "Education"=2)) 
+```
+
+```{r, layout="l-body-outset", warning=FALSE, message=FALSE}
+library(knitr)
+library(kableExtra)
+
+kbl(comparisonTable,
+    digits=2,
+    caption="Comparisons between population-weighted mean $NO_2$ concentrations for specific populations",
+    booktabs=T) %>%
+  kable_styling(position = "center", latex_options="scale_down")
+```
