@@ -1,0 +1,167 @@
+---
+title: "EvanWasner-PS6"
+author: "Evan Wasner"
+date: "12/9/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+``` {r, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+## Load data
+load("PC.Rdata")
+
+## Assign a ggplot for each year: U3
+for(val in c(1:7)) {
+  assign(paste0("p_U3_",val),
+         ggplot(PC.List[[val]], aes(x=U3, y=CPIU_Inflation)) + 
+           geom_point() + 
+           xlab("Unemployment (U3) Rate") +
+           ylab("Inflation (CPI)") +
+           #scale_x_continuous(limits=c(0,10), labels="Unemployment (U3) Rate") +
+           #scale_y_continuous(limits=c(-2,15), labels="Unemployment (U3) Rate") +
+           ggtitle(years.List[[val]]) +
+           geom_smooth(method="lm", se=FALSE) +
+           theme_bw())
+}
+
+## Assign a ggplot for each year: U6
+for(val in c(5:7)) {
+  assign(paste0("p_U6_",val),
+         ggplot(PC.List[[val]], aes(x=U6, y=CPIU_Inflation)) + 
+           geom_point() + 
+           xlab("Unemployment (U6) Rate") +
+           ylab("Inflation (CPI)") +
+           ggtitle(years.List[[val]]) +
+           geom_smooth(method="lm", se=FALSE) +
+           theme_bw())
+}
+
+## Assign a ggplot for each year: TCU
+for(val in c(3:7)) {
+  assign(paste0("p_TCU_",val),
+         ggplot(PC.List[[val]], aes(x=TCU, y=CPIU_Inflation)) + 
+           geom_point() + 
+           xlab("Capacity Underutilization Rate") +
+           ylab("Inflation (CPI)") +
+           ggtitle(years.List[[val]]) +
+           geom_smooth(method="lm", se=FALSE) +
+           theme_bw())
+}
+
+## Assign a ggplot for each year: WageShare Inflation
+for(val in c(1:7)) {
+  assign(paste0("p_WageShare_",val),
+         ggplot(PC.List[[val]], aes(x=U3, y=WageShare_Inflation)) + 
+           geom_point() + 
+           xlab("Unemployment (U3) Rate") +
+           ylab("Inflation (WageShare)") +
+           ggtitle(years.List[[val]]) +
+           geom_smooth(method="lm", se=FALSE) +
+           theme_bw())
+}
+```
+
+# Problem Set 6 - Phillips Curve
+
+In PS6, we explore the world of Phillips Curves (PC). The original PC was and empirical observation described by economist William Phillips in his piece "The Relation between Unemployment and the Rate of Change of Money Wage Rates in the United Kingdom". While Phillips originally observed an inverse relation between unemployment and the rate of change of money wages in the UK, Paul Samuelson and Robert Solow later formalized the relation into what we now know as the Phillips Curve: the supposed trade-off between inflation and unemployment. Since its original conception, the PC has come under significant scrutiny and largely abandoned---particularly after the occurrence of stagflation in the 1970s. Nonetheless, the PC is still an important piece of macroeconomic theory, and new/different attempts to describe the relation between unemployment and inflation have continued.
+
+Below I explore several renditions of the Phillips Curve in the United States. We begin by plotting the "classic" PC: the relation between unemployment (as measured by the "U3" unemployment rate) and inflation (as measured by the rate of change of the consumer price index (CPI) for all urban consumers). Figure 1 displays all data points observed from 1948-2019. On first glance, there appears to be no significant relation between unemployment and inflation.
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Unemployment (U3) vs Inflation (CPI), 1948-2019", out.width = '70%', fig.align="center"}
+library(tidyverse)
+ggplot(PC, aes(x=U3, y=CPIU_Inflation)) +
+  geom_point() +
+  xlab("Unemployment (U3) Rate") +
+  ylab("Inflation") +
+#  ggtitle(years.List[[val]]) +
+#  geom_smooth(method="lm", se=FALSE) +
+  theme_bw()
+```
+
+One way to break down this data is to observe the relation between unemployment and inflation within subsets of time. In Figures 2 and 3, we plot unemployment (U3) versus inflation (CPI) broken down by decade. When observed decade by decade, the relation between unemployment and inflation seems to change over time. From 1950-1970, for example, there is a positive relation. However, this changes to a positive relation in the 1970s---with the onset of stagflation---and continues through to 2000. However, the years 2000-2010 witness a return to a negative relation, and the subsequent years evince no relationship.
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Unemployment (U3) vs Inflation (CPI), by Decade, 1950-1990", out.width = '70%', fig.align="center"}
+library(tidyverse)
+library(gridExtra)
+grid.arrange(p_U3_1, p_U3_2, p_U3_3, p_U3_4, nrow = 2)
+```
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Unemployment (U3) vs Inflation (CPI), by Decade, 1990-2019", out.width = '70%', fig.align="center"}
+library(tidyverse)
+library(gridExtra)
+grid.arrange(p_U3_5,p_U3_6,p_U3_7, nrow=2)
+```
+
+The U3 unemployment rate and CPI inflation rate are not the only indices which may be used to demonstrate the relationship signified by the PC. The real PC relation may be thought of as a relation between excess demand and the change in unit labor costs---or, more controversially, and index for the level of class struggle. Thus, we can use variables such as the U6 unemployment rate or the capacity underutilization rate as proxies for excess demand, and the rate of change in the wage share for inflation.
+
+In Figure 4, we plot each of these indices superimposed on a time series. It is evident that the U3 unemployment rate, U6 unemployment rate, and capacity underutilization rate all tend to see the same trends over time. Thus, when plotting each of these excess demand indices against inflation, we would expect to find similar relationships. However, the rate of change in the wage share---an index which tries to capture the bargaining power of workers, with an increase in the wage share (inflation) indicating strong bargaining power for workers---does not exactly overlap with the CPI inflation rate.
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Excess Demand and Inflation Indices over Timer, 1948-2019", out.width = '70%', fig.align="center"}
+library(tidyverse)
+library(gridExtra)
+grid.arrange(ggplot(PC.Melt.U, aes(x=year, y=Value, col=Rate_Type)) + 
+               geom_line(size=1) +
+               scale_color_discrete(name="Rate Type",
+                                    labels=c("U3",
+                                             "U6", 
+                                             "Capacity Underutilization\n(Scaled by 2/3)")) +
+               theme_bw(),
+             ggplot(PC.Melt.I, aes(x=year, y=Value, col=Rate_Type)) + 
+               geom_line(size=1) +
+               scale_color_discrete(name="Rate Type",
+                                    labels=c("Inflation (CPI)", 
+                                             "Inflation (Profit Share)")) +
+               theme_bw(), 
+             nrow=2)
+```
+
+In Figure 5, we plot unemployment (U6) versus inflation (CPI) broken down by decades from 1990-2019 (the only years with the U6 data available). As compared with the same years for the U3 data in Figure 3, we observe similar relations between unemployment and inflation. Figures 6 and 7 use the capacity underutilization rate instead of the unemployment rate. However, while the relations in the years 1990-2019 (shown in Figure 7) match with those of the unemployment rates, the years 1970-1990 display no visible relation between capacity underutilization and inflation.
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Unemployment (U6) vs Inflation (CPI), by Decade, 1990-2019", out.width = '70%', fig.align="center"}
+library(tidyverse)
+library(gridExtra)
+grid.arrange(p_U6_5,p_U6_6,p_U6_7, nrow=2)
+```
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Capacity Underutilization vs Inflation (CPI), by Decade, 1970-1990", out.width = '70%', fig.align="center"}
+library(tidyverse)
+library(gridExtra)
+grid.arrange(p_TCU_3,p_TCU_4, nrow=1)
+```
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Capacity Underutilization vs Inflation (CPI), by Decade, 1990-2019", out.width = '70%', fig.align="center"}
+library(tidyverse)
+library(gridExtra)
+grid.arrange(p_TCU_5,p_TCU_6,p_TCU_7, nrow=2)
+```
+
+Finally, in Figures 8 and 9, we plot unemployment (U3) versus the rate of change in the wage share. Here, however, we see that there is consistently a negative relation between unemployment and inflation. This is further confirmed in Figure 10, which plots all data points for the years 1950-2019. These results match the relationship that Anwar Shaikh attempted to capture; since the rate of change in the wage share of GDP is a better indicator of the level of class struggle than general inflation, this points to the possibility of a real relationship between unemployment and the level of class struggle---an hypothesis analyzed long ago by Marx.
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Unemployment (U3) vs Inflation (Wage Share), by Decade, 1950-1990", out.width = '70%', fig.align="center"}
+library(tidyverse)
+library(gridExtra)
+grid.arrange(p_WageShare_1, p_WageShare_2, p_WageShare_3, p_WageShare_4, nrow = 2)
+```
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Unemployment (U3) vs Inflation (Wage Share), by Decade, 1990-2019", out.width = '70%', fig.align="center"}
+library(tidyverse)
+library(gridExtra)
+grid.arrange(p_WageShare_5,p_WageShare_6,p_WageShare_7, nrow=2)
+```
+
+```{r, layout="l-body-outset", message=FALSE, warning=FALSE, fig.cap="Phillips Curve: Unemployment (U3) vs Inflation (Wage Share), 1948-2019", out.width = '70%', fig.align="center"}
+library(tidyverse)
+ggplot(PC, aes(x=U3, y=WageShare_Inflation)) +
+  geom_point() +
+  xlab("Unemployment (U3) Rate") +
+  ylab("Inflation (Wage Share)") +
+#  ggtitle(years.List[[val]]) +
+  geom_smooth(method="lm", se=FALSE) +
+  theme_bw()
+```
